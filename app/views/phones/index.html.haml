@@ -1,12 +1,15 @@
-%h2 Phones
+%h2 Browse Phones
 
 %table#phones
   %thead
     %tr
       %th Brand
       %th Name
+      %th Rating
     %tbody
       - @phones.each do |phone|
         %tr
           %td= phone.brand
           %td= link_to "#{phone.name}", phone_path(phone)
+          %td
+            %h3= Random.rand(100).to_s+"%"

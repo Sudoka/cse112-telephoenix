@@ -5,3 +5,15 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+p1= Phone.create(name: 'Iphone 5', brand: 'Apple')
+p2= Phone.create(name: 'Iphone 4', brand: 'Apple')
+p3= Phone.create(name: 'Iphone 4s', brand: 'Apple')
+p4= Phone.create(name: 'Galaxy SIII', brand: 'Samsung')
+p5= Phone.create(name: 'Rumor Touch', brand: 'LG')
+p6= Phone.create(name: 'Triumph', brand: 'Motorola')
+p7= Phone.create(name: 'Array', brand: 'Samsung')
+
+Tag.create(phone: p1, key: 'Smartphone', value: 'Yes')
+Tag.create(phone: p1, key: 'Camera', value: 'Front and Back')
+Tag.create(phone: p1, key: 'Keyboard', value: 'Virtual')
+Tag.create(phone: p7, key: 'Keyboard', value: 'Physical Sliding')
