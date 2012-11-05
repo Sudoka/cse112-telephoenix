@@ -1,0 +1,12 @@
+%h2 Phones
+
+%table#phones
+  %thead
+    %tr
+      %th Brand
+      %th Name
+    %tbody
+      - @phones.each do |phone|
+        %tr
+          %td= phone.brand
+          %td= link_to "#{phone.name}", phone_path(phone)
