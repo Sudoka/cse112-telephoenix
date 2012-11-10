@@ -28,6 +28,7 @@ gem 'jquery-rails'
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
 gem 'haml'
+gem 'nokogiri'
 
 group :test do
   # Pretty printed test output
