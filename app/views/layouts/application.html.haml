@@ -7,7 +7,14 @@
     = csrf_meta_tags
 
   %body
-    =image_tag 'tplogo.png'
+    = image_tag 'tplogo.png'
+    
+    %div#navbar
+      = link_to "Home"
+      = link_to "About"
+      = link_to "Contact"
+      = link_to "Browse"
+      = link_to "Search"
     = yield
 
 
