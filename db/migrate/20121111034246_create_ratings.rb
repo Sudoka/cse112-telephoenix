@@ -10,6 +10,6 @@ class CreateRatings < ActiveRecord::Migration
     end
   end
   def down
-    drop_table ratings
+    drop_table :ratings
   end
 end
