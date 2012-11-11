@@ -11,11 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121105204056) do
+ActiveRecord::Schema.define(:version => 20121111034942) do
 
   create_table "phones", :force => true do |t|
     t.string   "name"
     t.string   "brand"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "ratings", :force => true do |t|
+    t.integer  "source_id"
+    t.integer  "rating"
+    t.integer  "number_reviews"
+    t.integer  "phone_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -29,10 +38,34 @@ ActiveRecord::Schema.define(:version => 20121105204056) do
     t.datetime "updated_at"
   end
 
+  create_table "sources", :force => true do |t|
+    t.string   "name"
+    t.string   "url"
+    t.string   "category"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "tags", :force => true do |t|
     t.integer  "phone_id"
     t.string   "key"
     t.string   "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_types", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "user_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", :force => true do |t|
+    t.integer  "username"
+    t.string   "email"
+    t.string   "password"
+    t.string   "ip_address"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

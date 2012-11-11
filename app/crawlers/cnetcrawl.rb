@@ -5,6 +5,9 @@ class CNETCrawl
   require 'nokogiri'
   require 'open-uri'
   
+  #Get the Source object from the DB
+  source = Source.find_by_name(:cnet)
+
   #Set and Load CNET URL
   url = "http://reviews.cnet.com/4566-6454_7-0-0.html?rpp=30"
   doc = Nokogiri::HTML(open(url))
@@ -17,7 +20,9 @@ class CNETCrawl
   phones.each do |p|
     p = p.to_s.strip
     brand = p[0,p.index(" ")]
-    phone = p[p.index(" ")+1,p.length]
-    Phone.create(name: phone, brand: brand)
+    name = p[p.index(" ")+1,p.length]
+
+    phone = Phone.find_or_create_by_name_and_brand(name, brand)
+    
   end
 end
