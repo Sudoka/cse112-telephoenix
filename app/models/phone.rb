@@ -5,7 +5,7 @@ class Phone < ActiveRecord::Base
   attr_accessible :id, :name, :brand
 
   def self.search (search)
-  	find(:all, :select => "Phones.id, name, brand", :from => "Tags, Phones", :conditions => ['key LIKE ? AND phone_id = Phones.id', search]) +
+  	find(:all, :select => "Phones.id, name, brand", :from => "Tags, Phones", :conditions => ['value LIKE ? AND phone_id = Phones.id', "%" + search + "%"]) +
   	find(:all, :conditions => ['name LIKE ?', search])
   end
   
