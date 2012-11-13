@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121111034942) do
+ActiveRecord::Schema.define(:version => 20121113001952) do
 
   create_table "phones", :force => true do |t|
     t.string   "name"
@@ -25,6 +25,14 @@ ActiveRecord::Schema.define(:version => 20121111034942) do
     t.integer  "rating"
     t.integer  "number_reviews"
     t.integer  "phone_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "review_likes", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "review_id"
+    t.boolean  "like"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

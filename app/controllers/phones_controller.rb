@@ -9,4 +9,8 @@ class PhonesController < ApplicationController
     @ratings = Rating.find_all_by_phone_id(params[:id])
     @reviews = Review.find_all_by_phone_id(params[:id])
   end
+
+  def create
+  	@phones = Phone.search(params[:name])
+  end
 end

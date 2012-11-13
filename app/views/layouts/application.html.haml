@@ -14,7 +14,8 @@
       = link_to "About"
       = link_to "Contact"
       = link_to "Browse"
-      = link_to "Search"
+      = form_tag :class => "navbar-search pull-left", :method => :get do
+        = text_field_tag :name, nil, :class => "search-query span3", :placeholder => "Search"
     = yield
 
 
