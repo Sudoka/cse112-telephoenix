@@ -10,13 +10,14 @@
 
 %h3 Reviews
 
-= link_to "New Review", new_phone_review_path(@phone)
+= link_to "New Review", new_review_path
 
 %table#reviews
   %tbody
     - @reviews.each do |review|
       %tr
-        %td= review.user.username
-        %td= review.rating
-        %td= review.review_text
+        %td
+          review.user_id.name
+          review.rating
+        %td=review.review_text
 				

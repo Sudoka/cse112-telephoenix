@@ -1,0 +1,4 @@
+%h2= New Review
+= form_tag review_path(@review), method: put do
+
+				

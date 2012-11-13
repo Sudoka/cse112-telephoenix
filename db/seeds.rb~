@@ -5,7 +5,6 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-User.create(username: 'Suckboy', email: 'loser@gmail.com', password: 'qwerty', ip_address: 1)
 p1= Phone.create(name: 'Iphone 5', brand: 'Apple')
 p2= Phone.create(name: 'Iphone 4', brand: 'Apple')
 p3= Phone.create(name: 'Iphone 4s', brand: 'Apple')

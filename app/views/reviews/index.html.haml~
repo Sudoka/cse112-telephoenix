@@ -1,0 +1,13 @@
+%h2 New Review
+
+= form_tag reviews_path, method: :post do
+  = label :review, :rating, 'Rating'
+  = select :review, :rating, (1..10)
+
+  = label :review, :review_text, 'Review'
+  = text_area :review, :review_text, :cols => 80, :rows => 20
+
+  = submit_tag 'Save'
+  
+
+				
