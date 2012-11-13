@@ -1,5 +1,10 @@
 class Review < ActiveRecord::Base
   belongs_to :phone
   belongs_to :user
-  attr_accessible :id, :user_id, :phone_id, :review_text, :rating, :user, :phone
+<<<<<<< HEAD
+  attr_accessible :id, :user, :phone, :review_text, :rating, :user_id, :phone_id
+=======
+  has_many :review_likes
+  attr_accessible :id, :user_id, :phone_id, :review_text, :rating
+>>>>>>> 3607262b40ecd65bdc2e5bb404b0284b53d941ae
 end

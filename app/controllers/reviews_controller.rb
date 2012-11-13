@@ -22,7 +22,7 @@ class ReviewsController < ApplicationController
     @review = @phone.reviews.build(params[:review])
     @review.user = @user
     @review.save
-    redirect_to phones_path(@review.phone_id)
+    redirect_to phone_path(@phone)
   end
 
 end
