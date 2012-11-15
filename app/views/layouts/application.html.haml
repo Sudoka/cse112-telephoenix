@@ -7,15 +7,17 @@
     = csrf_meta_tags
 
   %body
-    = image_tag 'tplogo.png'
-    
+   
+    %div#headbar
+      = image_tag 'tplogo.png'
     %div#navbar
       = link_to "Home"
       = link_to "About"
       = link_to "Contact"
-      = link_to "Browse"
+      = link_to "Browse", phones_path
       = form_tag :class => "navbar-search pull-left", :method => :get do
         = text_field_tag :name, nil, :class => "search-query span3", :placeholder => "Search"
+      %div#navClear
     = yield
 
 
