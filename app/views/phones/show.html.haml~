@@ -1,9 +1,0 @@
-%h2= @phone.brand + ' ' + @phone.name
-%p= link_to "Back", phones_path
-
-%ul#tags
-  - @tags.each do |tag|
-    %li= tag.key + ": " + tag.value
-    
-  - @ratings.each do |rating|
-    %li= "Rating: " + rating.rating.to_s
