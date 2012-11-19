@@ -1,0 +1,14 @@
+%h2 Reviews
+
+%table#reviews
+  %thead
+    %tr
+      %th User
+      %th Phone
+      %th Rating
+  %tbody
+    - @reviews.each do |review|
+      %tr
+        %td= review.user
+        %td= review.phone
+        %td= review.rating

@@ -20,4 +20,4 @@
         %tr
           %td pro review here
           %td~ ("Rating: " + review.rating.to_s + "\nUser: " + review.user.username.to_s + "\n" + review.review_text)
-          %td= link_to "View Comments (" + review.comments.count.to_s + ")", phone_review_path(@phone, review)
+          %td= link_to "View Comments (" + review.comments.count.to_s + ")", phone_review_comments_path(@phone, review)

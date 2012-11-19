@@ -9,7 +9,6 @@ class ReviewsController < ApplicationController
 
   def show
     @review = Review.find(params[:id])
-    @comments = Comment.find_all_by_review_id(params[:id])
   end
 
   def new

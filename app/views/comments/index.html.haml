@@ -1,0 +1,14 @@
+%h2 Comments
+
+%table#comment
+  %thead
+    %tr
+      %th User
+      %th Review
+      %th Text
+  %tbody
+    - @comments.each do |comment|
+      %tr
+        %td= comment.user
+        %td= comment.review
+        %td= comment.comment_text
