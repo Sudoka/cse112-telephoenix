@@ -17,16 +17,21 @@ class CNETCrawl
     doc = Nokogiri::HTML(open(url))
     
     #Scrape all phones and their ratings
-    info = doc.xpath('//div[@class="prodInfo"]')
+    info = doc.xpath('//section[@class="product"]')
     stillGoing = false
 
     #Break down the data and add to DB
     info.each do |i|
       stillGoing = true
-      p = i.xpath('a/h3/text()[1]')
-      r = i.xpath('div/div/a/@data-tiptitle')
-      userRev = i.xpath('div/span/a/@data-tiptitle')
-      numUserRev = i.xpath('div/span/a/@data-tiptext')
+      p = i.xpath('div/a/h3/text()[1]')
+      r = i.xpath('div/div/div/a/@data-tiptitle')
+      userRev = i.xpath('div/div/span/a/@data-tiptitle')
+      numUserRev = i.xpath('div/div/span/a/@data-tiptext')
+      image = i.xpath('a[@class="image"]/img/@src')
+
+      open('app/assets/images/phones'+image.to_s[image.to_s.rindex('/'),image.to_s.length], 'wb') do |file|
+        file << open(image.to_s).read
+      end
       puts r.to_s
       puts userRev.to_s + " with "+ numUserRev.to_s
       
@@ -43,7 +48,7 @@ class CNETCrawl
       end
       
       
-      phone = Phone.find_or_create_by_name_and_brand(name, brand)
+      phone = Phone.find_or_create_by_name_and_brand_and_imgurl(name, brand, '/assets/phones'+image.to_s[image.to_s.rindex('/'),image.to_s.length])
       if (rate != nil)  
         rating = Rating.find_or_create_by_source_id_and_phone_id(source.id, phone.id)
         rating.rating = Integer(rate*20)

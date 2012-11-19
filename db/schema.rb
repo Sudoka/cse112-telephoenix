@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(:version => 20121119053426) do
   create_table "phones", :force => true do |t|
     t.string   "name"
     t.string   "brand"
+    t.string   "imgurl"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
