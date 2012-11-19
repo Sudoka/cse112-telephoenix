@@ -23,7 +23,7 @@
       = link_to "About"
       = link_to "Contact"
       = link_to "Browse", phones_path
-      = form_tag :class => "navbar-search pull-left", :method => :get do
+      = form_tag phones_path :class => "navbar-search pull-left", :method => :get do
         = text_field_tag :name, nil, :class => "search-query span3", :placeholder => "Search"
       %div#navClear
     - if flash[:message]

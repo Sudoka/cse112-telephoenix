@@ -12,4 +12,4 @@
           %td= phone.brand
           %td= link_to "#{phone.name}", phone_path(phone)
           %td
-            %h3= Random.rand(100).to_s+"%"
+            %h3= phone.overallRatings().to_s+"%"
