@@ -9,6 +9,8 @@ class PhonesController < ApplicationController
     @ratings = Rating.find_all_by_phone_id(params[:id])
     @reviews = Review.find_all_by_phone_id(params[:id])
     @overallrate = @phone.overallRatings()
+    @prorating = @phone.proRating()
+    @userrating = @phone.userRating()
   end
 
   def create

@@ -8,14 +8,16 @@
   - @ratings.each do |rating|
     %li= "Rating: " + rating.rating.to_s
 
-%h4~ ("Overall Rating: " + @overallrate.to_s )
+%h4~ ("Pro Rating: " + @prorating.to_s)
+%h4~ ("User Rating: " + @userrating.to_s)
+%h3~ ("Overall Rating: " + @overallrate.to_s )
 
 %table#reviews
   %col{:width => "200px"}/
   %thead
     %tr
       %th Pro Reviews
-      %th User Reviews
+      %th TelePhoenix User Reviews
       %th= link_to "New Review", new_phone_review_path(@phone)
     %tbody
       - @reviews.each do |review|
