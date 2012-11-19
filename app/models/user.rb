@@ -2,7 +2,7 @@ require 'digest/sha1'
 
 class User < ActiveRecord::Base
   has_many :reviews
-  #make_flagger
+  make_flag :flag_once => true
   attr_accessible :username, :email, :password, :password_confirmation, :ip_address
   attr_protected :id, :salt
   attr_accessor :password, :password_confirmation
