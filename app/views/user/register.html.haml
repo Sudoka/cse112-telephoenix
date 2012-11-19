@@ -1,16 +1,21 @@
-%h2 Register
+%h2 <center> Register
+
+<center>
 
 = form_tag user_register_path, method: :post do
   = label :user, :username, "Username"
   = text_field :user, :username
-
+  %p 
   = label :user, :password, "Password"
   = text_field :user, :password
+  %p
 
   = label :user, :password_confirmation, "Confirm Password"
   = text_field :user, :password_confirmation
+  %p
 
   = label :user, :email, "Email"
   = text_field :user, :email
+  %p
 
   = submit_tag "Register"
