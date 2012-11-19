@@ -4,9 +4,11 @@
 %ul#tags
   - @tags.each do |tag|
     %li= tag.key + ": " + tag.value
-    
+
   - @ratings.each do |rating|
     %li= "Rating: " + rating.rating.to_s
+
+%h4~ ("Overall Rating: " + @overallrate.to_s )
 
 %table#reviews
   %col{:width => "200px"}/
