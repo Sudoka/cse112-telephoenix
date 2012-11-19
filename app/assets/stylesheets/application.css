@@ -47,3 +47,13 @@ div#navbar form {
   clear: right;
   margin-right:20px;
 }
+
+div#currentuser {
+  float:right;
+  margin-right:20px;
+  color:white;
+}
+
+div#currentuser a {
+color: white;
+}

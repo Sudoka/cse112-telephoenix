@@ -1,4 +1,16 @@
 Telephoenix::Application.routes.draw do
+  get "user/register"
+  post "user/register"
+
+  get "user/login"
+  post "user/login"
+
+  get "user/logout"
+
+  get "user/delete"
+
+  get "user/edit"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -55,6 +67,7 @@ Telephoenix::Application.routes.draw do
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id(.:format)))'
+  
 resources :phones do
     resources :reviews
 end

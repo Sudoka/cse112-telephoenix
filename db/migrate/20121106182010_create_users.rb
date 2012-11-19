@@ -2,9 +2,11 @@ class CreateUsers < ActiveRecord::Migration
   def up
     create_table :users do |t|
       t.integer :id
-      t.integer :username
+      t.string :username
       t.string :email
-      t.string :password
+      t.string :hashed_password
+      t.string :testing
+      t.string :salt
       t.string :ip_address
 
       t.timestamps

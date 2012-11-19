@@ -1,5 +1,8 @@
 class ReviewsController < ApplicationController
   respond_to :html
+  
+  before_filter :login_required, :only=>['new','create']
+
   def index
     @reviews = Review.all
   end
@@ -10,7 +13,7 @@ class ReviewsController < ApplicationController
 
   def new
     @phone = Phone.find(params[:phone_id])
-    @user = User.find(1)
+    @user = current_user
     @review = @phone.reviews.build
     @review.user = @user
     respond_with(@review)
@@ -18,7 +21,7 @@ class ReviewsController < ApplicationController
 
   def create
     @phone = Phone.find(params[:phone_id])
-    @user = User.find_by_username('Suckboy')
+    @user = current_user
     @review = @phone.reviews.build(params[:review])
     @review.user = @user
     @review.save

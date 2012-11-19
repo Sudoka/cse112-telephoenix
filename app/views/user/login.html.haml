@@ -1,0 +1,10 @@
+%h2 Login
+= form_tag user_login_path, method: :post do
+  = label :user, :username, "Username"
+  = text_field :user, :username
+
+  = label :user, :password, "Password"
+  = password_field :user, :password
+
+  = submit_tag "Login"
+  = link_to "Register", user_register_path
