@@ -25,7 +25,7 @@ class Phone < ActiveRecord::Base
     overall += review.rating*10
     total += 1
   end
-	return (total>0) ? overall/total : (nil)
+	return (total>0) ? overall/total : ("NA")
   end
 #=end
 
