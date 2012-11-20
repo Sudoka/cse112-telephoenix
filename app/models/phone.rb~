@@ -14,7 +14,7 @@ class Phone < ActiveRecord::Base
   
   def self.phones_on_page (args={})
       sort_by = args[:sort_by]
-      current_page = args[:current_page]
+      current_page = args[:current_page].to_i
       num_per_page = args[:num_per_page]
      
       start = (current_page-1)*num_per_page+1
