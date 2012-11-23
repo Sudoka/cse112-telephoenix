@@ -7,23 +7,55 @@
   %thead
     %tr
       %th
-      %th=link_to "Brand", phones_path(:sort_by=>"brand")
+      %th=link_to "Brand", phones_path(:sort_by=>"brand", :rating => @rating_checked, :brand => @brands_params, :os => @os_params)
       %th Name
-      %th=link_to "Rating", phones_path(:sort_by=>"rating")
+      %th=link_to "Rating", phones_path(:sort_by=>"rating", :rating => @rating_checked, :brand => @brands_params, :os => @os_params)
     %tbody
       - @phones.each do |phone|
         %tr
-          %td= #(phone.imgurl)? (image_tag phone.imgurl) : ""
+          %td= ""#(phone.imgurl)? (image_tag phone.imgurl) : ""
           %td= phone.brand
           %td= link_to "#{phone.name}", phone_path(phone)
           %td
             %h3= phone.overallRatings().to_s+"%"
 
-= link_to_unless @current_page==1, "Previous Page", phones_path(:sort_by=>@sort_by, :page=>(@current_page-1) )
+
+
+= link_to_unless  @current_page==1, "Previous Page", 
+    phones_path(:sort_by=>@sort_by, :page=>(@current_page-1), :rating => @rating_checked, :brand => @brands_params, :os => @os_params ) 
 
 - @pages_bar.each do |p|
-  = link_to_unless @current_page==p||p=="...",  "#{p}", phones_path(:sort_by=>@sort_by, :page=>p )
+  = link_to_unless  @current_page==p||p=="...",  "#{p}", 
+      phones_path(:sort_by=>@sort_by, :page=>p, :rating => @rating_checked, :brand => @brands_params, :os => @os_params ) 
 
-=link_to_unless @current_page==@num_pages,  "Next Page", phones_path(:sort_by=>@sort_by, :page=>(@current_page+1) )
+=link_to_unless  @current_page==@num_pages,  "Next Page", 
+    phones_path(:sort_by=>@sort_by, :page=>(@current_page+1), :rating => @rating_checked, :brand => @brands_params, :os => @os_params ) 
+
+%nav#R_col{:align => "right"}
+  = form_tag '/phones?rating=4', :method => :get, :id =>"side_col" do
+    %section#Brand
+      %h4 Manufacturer
+      - @brands. each do |b|
+        = check_box_tag name= "brands[#{b}]", value = 1, checked = @brands_checked[b], :class => "ratings", :onclick => "$('#side_col').submit()"
+        = "#{b}"
+        %br
+      = link_to "#{@brands_see}", phones_path(:all_brands=>@brands_all)
+    %section#OS
+      %h4 Operating System
+      - @os.each do |s|
+        = check_box_tag name= "os[#{s}]", value = 1, checked = @os_checked[s], :class => "ratings", :onclick => "$('#side_col').submit()"
+        = "#{s}"
+        %br
+    %section#Rating
+      %h4 Overall Rating
+      - @ratings.each do |r|       
+        = link_to image_stars(r)+content_tag(:span, "&UP") , phones_path(:rating => r, :brand => @brands_params, :os => @os_params)
+        %br
+     
+
+
+
+
+
 
 

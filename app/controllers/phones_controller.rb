@@ -1,17 +1,21 @@
 class PhonesController < ApplicationController
   def index
-   
-    @num_per_page = 20
+    
+    @num_per_page = 5
     @num_all  = Phone.count
     @num_pages = (@num_all.to_f/@num_per_page).ceil
-
-    @phones = Phone.all
+  
     @sort_by = params[:sort_by]
     @current_page = params[:page].nil? ?  1 : params[:page].to_i 
-   
-   
+    @brands_all = params[:all_brands].nil? ? 0 : params[:all_brands].to_i   
+    @brands_params = params[:brands].nil? ?  {} : params[:brands]
+    @os_params = params[:os].nil? ? {} : params[:os]
+    @rating_checked = params[:rating].nil? ? 0 : params[:rating].to_i
+    
+    
     @phones = Phone.phones_on_page :sort_by => @sort_by, :current_page => @current_page, :num_per_page => @num_per_page 
-  
+    
+    ####                 pagination
     @pages_bar = []
     @pages_bar[1] = 1
     i = 1
@@ -30,7 +34,33 @@ class PhonesController < ApplicationController
     elsif @current_page< @num_pages
        @pages_bar[i] = @current_page+1
     end 
-         
+    ####                     right column     
+    ##             brands 
+    brands = Phone.select("distinct brand")
+    @brands = []
+    brands.each_index {|i| @brands[i] = brands[i].brand}
+    if @brands_all == 0
+       @brands = @brands[1 .. 7] 
+       @brands_see = "See all brands"
+       @brands_all = 1
+    else 
+       @brands_see = "See fewer brands"
+       @brands_all = 0
+    end
+    @brands_checked = {}
+    @brands.each do |b|
+       @brands_checked[b] = @brands_params[b].nil?  ?  false : true
+    end       
+    ##             operating system
+    @os =["Android", "BlackBerry", "Brew", "IOS", "Symbian", "Windows Phone 7"]
+    @os_checked = {}
+    @os.each do |s|
+       @os_checked[s] = @os_params[s].nil? ? false : true
+    end
+    ##              rating
+    @ratings =[4,3,2,1]
+    
+    
   end
 
 
