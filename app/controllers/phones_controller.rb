@@ -1,20 +1,24 @@
 class PhonesController < ApplicationController
   def index
-    
+     
     @num_per_page = 15
     @num_all  = Phone.count
     @num_pages = (@num_all.to_f/@num_per_page).ceil
   
-    @sort_by = params[:sort_by]
+    @sort_by = params[:sort].nil? ?   :brand  :  params[:sort][:word].downcase
     @current_page = params[:page].nil? ?  1 : params[:page].to_i 
     @brands_all = params[:all_brands].nil? ? 0 : params[:all_brands].to_i   
     @brands_params = params[:brands].nil? ?  {} : params[:brands]
     @os_params = params[:os].nil? ? {} : params[:os]
     @ratings_params = params[:ratings].nil? ? {} : params[:ratings]
-    
-    
+   
+    ####fetch data: @sort_by is "brand"/"rating" 
     @phones = Phone.phones_on_page :sort_by => @sort_by, :current_page => @current_page, :num_per_page => @num_per_page 
     
+    ####                 sort
+    @select = []
+    @select[0] = @sort_by.capitalize
+    @select[1] = @sort_by=="brand" ? "Rating" : "Brand"
     ####                 pagination
     @pages_bar = []
     @pages_bar[1] = 1

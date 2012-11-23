@@ -27,9 +27,9 @@ class Phone < ActiveRecord::Base
 
   def self.sort_by (attr)
       phones= self.all;
-     if attr== :brand    
+     if attr== "brand" || attr == :brand  
       phones.sort {|p1,p2| p1.brand.downcase<=>p2.brand.downcase}      
-     elsif attr== :rating
+     elsif attr== "rating" || attr == :rating
       phones.sort {|p1,p2| 
          rating_1 = (p1.overallRatings =="NA") ? 0 : p1.overallRatings
          rating_2 = (p2.overallRatings =="NA") ? 0 : p2.overallRatings

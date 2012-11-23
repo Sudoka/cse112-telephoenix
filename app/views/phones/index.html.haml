@@ -1,15 +1,17 @@
+= stylesheet_link_tag 'phones'
 %h2 Browse Phones
 
--s = @sort_by.nil?  ?  "" : "Sort by #{@sort_by} "
-%body="Showing #{(@current_page-1)*@num_per_page+1}-#{@current_page*@num_per_page} of #{@num_all} Results     " +  s
+-s = @sort_by.nil?  ?  "" : "Sort by #{@sort_by.capitalize} "
+%span="Showing #{(@current_page-1)*@num_per_page+1}-#{@current_page*@num_per_page} of #{@num_all} Results     " 
+
 
 %table#phones
   %thead
     %tr
       %th
-      %th=link_to "Brand", phones_path(:sort_by=>"brand", :ratings => @ratings_params, :brands => @brands_params, :os => @os_params)
+      %th=link_to "Brand", phones_path(:sort=>{"word" => "brand"}, :ratings => @ratings_params, :brands => @brands_params, :os => @os_params)
       %th Name
-      %th=link_to "Rating", phones_path(:sort_by=>"rating", :ratings => @ratings_params, :brands => @brands_params, :os => @os_params)
+      %th=link_to "Rating", phones_path(:sort=>{"word"=> "rating"}, :ratings => @ratings_params, :brands => @brands_params, :os => @os_params)
     %tbody
       - @phones.each do |phone|
         %tr
@@ -21,18 +23,18 @@
 
 
 
-= link_to_unless  @current_page==1, "Previous Page", 
-    phones_path(:sort_by=>@sort_by, :page=>(@current_page-1), :ratings => @ratings_params, :brands => @brands_params, :os => @os_params ) 
+= link_to_unless  @current_page==1, "Previous Page",  phones_path(:sort =>{ "word" => @sort_by }, :page=>(@current_page-1), :ratings => @ratings_params, :brands => @brands_params, :os => @os_params ) 
 
 - @pages_bar.each do |p|
-  = link_to_unless  @current_page==p||p=="...",  "#{p}", 
-      phones_path(:sort_by=>@sort_by, :page=>p, :ratings => @ratings_params, :brands => @brands_params, :os => @os_params ) 
+  = link_to_unless  @current_page==p||p=="...",  "#{p}", phones_path(:sort=>{"word" => @sort_by}, :page=>p, :ratings => @ratings_params, :brands =>@brands_params, :os => @os_params ) 
 
-=link_to_unless  @current_page==@num_pages,  "Next Page", 
-    phones_path(:sort_by=>@sort_by, :page=>(@current_page+1), :ratings => @ratings_params, :brands => @brands_params, :os => @os_params ) 
+=link_to_unless  @current_page==@num_pages,  "Next Page", phones_path(:sort=>{"word"=>@sort_by}, :page=>(@current_page+1), :ratings => @ratings_params, :brands => @brands_params, :os => @os_params ) 
 
 %nav#R_col{:align => "right"}
   = form_tag phones_path, :method => :get, :id =>"side_col" do
+    %section#Sort 
+      = "Sort by"
+      = select :sort, :word, @select, {}, :onchange => "$('#side_col').submit()"
     %section#Brands
       %h4 Manufacturer
       - @brands. each do |b|

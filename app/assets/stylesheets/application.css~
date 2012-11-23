@@ -65,6 +65,6 @@ nav#R_col {
   top   :180px;
 }
 nav#R_col img{
-  height :50px;
-  width  :40px
+  height :20px;
+  width  :20px
 }

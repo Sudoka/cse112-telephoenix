@@ -14,7 +14,7 @@ class Phone < ActiveRecord::Base
   
   def self.phones_on_page (args={})
       sort_by = args[:sort_by]
-      current_page = args[:current_page].to_i
+      current_page = args[:current_page]
       num_per_page = args[:num_per_page]
      
       start = (current_page-1)*num_per_page+1
@@ -27,9 +27,9 @@ class Phone < ActiveRecord::Base
 
   def self.sort_by (attr)
       phones= self.all;
-     if attr== :brand    
+     if attr== "brand"    
       phones.sort {|p1,p2| p1.brand.downcase<=>p2.brand.downcase}      
-     elsif attr== :rating
+     elsif attr== "rating"
       phones.sort {|p1,p2| 
          rating_1 = (p1.overallRatings =="NA") ? 0 : p1.overallRatings
          rating_2 = (p2.overallRatings =="NA") ? 0 : p2.overallRatings
