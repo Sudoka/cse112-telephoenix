@@ -1,7 +1,7 @@
 class PhonesController < ApplicationController
   def index
     
-    @num_per_page = 5
+    @num_per_page = 15
     @num_all  = Phone.count
     @num_pages = (@num_all.to_f/@num_per_page).ceil
   
@@ -10,7 +10,7 @@ class PhonesController < ApplicationController
     @brands_all = params[:all_brands].nil? ? 0 : params[:all_brands].to_i   
     @brands_params = params[:brands].nil? ?  {} : params[:brands]
     @os_params = params[:os].nil? ? {} : params[:os]
-    @rating_checked = params[:rating].nil? ? 0 : params[:rating].to_i
+    @ratings_params = params[:ratings].nil? ? {} : params[:ratings]
     
     
     @phones = Phone.phones_on_page :sort_by => @sort_by, :current_page => @current_page, :num_per_page => @num_per_page 
@@ -47,22 +47,26 @@ class PhonesController < ApplicationController
        @brands_see = "See fewer brands"
        @brands_all = 0
     end
-    @brands_checked = {}
-    @brands.each do |b|
-       @brands_checked[b] = @brands_params[b].nil?  ?  false : true
-    end       
+    @brands_checked = words_checked(@brands, @brands_params)
+        
     ##             operating system
     @os =["Android", "BlackBerry", "Brew", "IOS", "Symbian", "Windows Phone 7"]
-    @os_checked = {}
-    @os.each do |s|
-       @os_checked[s] = @os_params[s].nil? ? false : true
-    end
+    @os_checked = words_checked(@os, @os_params)
+
     ##              rating
-    @ratings =[4,3,2,1]
+    @ratings =["4","3","2","1"]   
     
-    
+    @ratings_checked = words_checked(@ratings, @ratings_params)
+   
   end
 
+  def words_checked (words, words_params)
+    words_checked = {}
+    words.each do |w|
+       words_checked[w] = words_params[w].nil? ? false : true
+    end
+    return words_checked
+  end
 
   def show
     
