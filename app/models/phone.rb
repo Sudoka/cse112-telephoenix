@@ -13,23 +13,69 @@ class Phone < ActiveRecord::Base
   end
   
   def self.phones_on_page (args={})
+      ##disply para
       sort_by = args[:sort_by]
       current_page = args[:current_page]
       num_per_page = args[:num_per_page]
-     
+      ##filter  para
+      brands = args[:brands]
+      os = args[:os]
+      rating = args[:rating]
+      ##filter & sort      
+      phones = self.filter_by_brand(brands)&self.filter_by_os(os)&self.filter_by_rating(rating)
+      phones = self.sort_by(phones, sort_by)      
+      ##phones on page
       start = (current_page-1)*num_per_page+1
-      tail = [self.count, current_page*num_per_page].min
-      
-      phones = self.sort_by(sort_by)
+      tail = [self.count, current_page*num_per_page].min          
       phones[start .. tail]
+  end
+  
+  def self.filter_by_brand (brands)  # brands=["brand1", "brand2"]      
+      phones = brands.empty? ?  self.all : self.where(:brand => brands)            
+  end
+  
+  def self.filter_by_os (os) # os=['os1' , 'os2']
+      phones = []
+      if os.empty? 
+        phones = self.all
+      else 
+        os.each do |s|
+           phones = phones + Phone.includes(:tags).where('tags.value LIKE ?', "%#{s}%")
+        end
+      end 
+      return phones        
+  end
+  
+  def self.filter_by_rating (rating)  #rating fixnum 20,40,60,80
+      phones = self.all
+      phones.find_all { |p|
+         r = (p.overallRatings=='NA') ?  0 : p.overallRatings 
+         r >= rating
+      }     
+  end
+  
+  def self.sort_by (phones, key) 
+      if key== "brand" || key == :brand  
+      phones.sort {|p1,p2| p1.brand.downcase<=>p2.brand.downcase}      
+      elsif key== "rating" || key == :rating
+      phones.sort {|p1,p2| 
+         rating_1 = (p1.overallRatings =="NA") ? 0 : p1.overallRatings
+         rating_2 = (p2.overallRatings =="NA") ? 0 : p2.overallRatings
+      
+         rating_2<=>rating_1
+      } 
+      else 
+      end
       
   end
 
-  def self.sort_by (attr)
+=begin 
+
+  def self.sort_by (key)
       phones= self.all;
-     if attr== "brand" || attr == :brand  
+     if key== "brand" || key == :brand  
       phones.sort {|p1,p2| p1.brand.downcase<=>p2.brand.downcase}      
-     elsif attr== "rating" || attr == :rating
+     elsif key== "rating" || key == :rating
       phones.sort {|p1,p2| 
          rating_1 = (p1.overallRatings =="NA") ? 0 : p1.overallRatings
          rating_2 = (p2.overallRatings =="NA") ? 0 : p2.overallRatings
@@ -41,6 +87,8 @@ class Phone < ActiveRecord::Base
      end
      
   end
+
+=end
   
 def overallRatings()
   overall = 0

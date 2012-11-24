@@ -14,7 +14,7 @@
       %th Rating
       - @phones.each do |phone|
         %tr
-          %td= ""#(phone.imgurl)? (image_tag phone.imgurl) : ""
+          %td=""#(phone.imgurl)? (image_tag phone.imgurl) : ""
           %td= phone.brand
           %td= link_to "#{phone.name}", phone_path(phone)
           %td
@@ -22,12 +22,12 @@
 
 
 
-= link_to_unless  @current_page==1, "Previous Page",  phones_path(:sort => @sort_by_params, :page=>(@current_page-1), :ratings => @ratings_params, :brands => @brands_params, :os => @os_params ) 
+= link_to_unless  @current_page==1, "Previous Page",  phones_path(:show=> @num_params, :sort_by => @sort_by_params, :page=>(@current_page-1), :ratings => @ratings_params, :brands => @brands_params, :os => @os_params ) 
 
 - @pages_bar.each do |p|
-  = link_to_unless  @current_page==p||p=="...",  "#{p}", phones_path(:sort=> @sort_by_params, :page=>p, :ratings => @ratings_params, :brands =>@brands_params, :os => @os_params ) 
+  = link_to_unless  @current_page==p||p=="...",  "#{p}", phones_path(:show=> @num_params, :sort_by=> @sort_by_params, :page=>p, :ratings => @ratings_params, :brands =>@brands_params, :os => @os_params ) 
 
-=link_to_unless  @current_page==@num_pages,  "Next Page", phones_path(:sort=> @sort_by_params, :page=>(@current_page+1), :ratings => @ratings_params, :brands => @brands_params, :os => @os_params ) 
+=link_to_unless  @current_page==@num_pages,  "Next Page", phones_path(:show=> @num_params, :sort_by=> @sort_by_params, :page=>(@current_page+1), :ratings => @ratings_params, :brands => @brands_params, :os => @os_params ) 
 
 %nav#R_col{:align => "right"}
   = form_tag phones_path, :method => :get, :id =>"side_col" do
@@ -42,7 +42,7 @@
         = check_box_tag name= "brands[#{b}]", value = 1, checked = @brands_checked[b], :class => "ratings", :onclick => "$('#side_col').submit()"
         = "#{b}"
         %br
-      = link_to "#{@brands_see}", phones_path(:all_brands=>@brands_all)
+      = link_to "#{@brands_see}", phones_path(:all_brands=>@brands_all, :sort_by=> @sort_by_params, :page=>@current_page, :ratings => @ratings_params, :brands => @brands_params, :os => @os_params )
     %section#OSs
       %h4 Operating System
       - @os.each do |s|
