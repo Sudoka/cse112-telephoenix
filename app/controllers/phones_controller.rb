@@ -1,11 +1,12 @@
 class PhonesController < ApplicationController
   def index
-     
-    @num_per_page = 15
+    @num_params = params[:show].nil? ?  {} : params[:show]
+    @num_per_page = params[:show].nil? ?  20 : params[:show][:number].to_i
     @num_all  = Phone.count
     @num_pages = (@num_all.to_f/@num_per_page).ceil
   
-    @sort_by = params[:sort].nil? ?   :brand  :  params[:sort][:word].downcase
+    @sort_by_params = params[:sort_by].nil? ?   {:word => :brand}  :  params[:sort_by][:word].downcase
+    sort_by = params[:sort_by].nil? ?   "brand" : params[:sort_by][:word].downcase
     @current_page = params[:page].nil? ?  1 : params[:page].to_i 
     @brands_all = params[:all_brands].nil? ? 0 : params[:all_brands].to_i   
     @brands_params = params[:brands].nil? ?  {} : params[:brands]
@@ -13,12 +14,21 @@ class PhonesController < ApplicationController
     @ratings_params = params[:ratings].nil? ? {} : params[:ratings]
    
     ####fetch data: @sort_by is "brand"/"rating" 
-    @phones = Phone.phones_on_page :sort_by => @sort_by, :current_page => @current_page, :num_per_page => @num_per_page 
+    @phones = Phone.phones_on_page :sort_by => sort_by, :current_page => @current_page, :num_per_page => @num_per_page 
     
     ####                 sort
     @select = []
-    @select[0] = @sort_by.capitalize
-    @select[1] = @sort_by=="brand" ? "Rating" : "Brand"
+    @select[0] = sort_by.capitalize
+    @select[1] = sort_by=="brand" ? "Rating" : "Brand"
+    ####                 items/page
+    @select_num = []
+    temp = [10, 20, 30]
+    @select_num[0] = @num_per_page
+    temp.each do |num| 
+      if num!= @num_per_page
+           @select_num << num
+      end
+    end
     ####                 pagination
     @pages_bar = []
     @pages_bar[1] = 1
