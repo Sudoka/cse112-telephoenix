@@ -11,6 +11,8 @@ Telephoenix::Application.routes.draw do
 
   get "user/edit"
 
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -74,5 +76,9 @@ resources :phones do
         resources :review_likes
     end
 end
+
+resources :moderators
+resources :admins
+
 root to: redirect('/phones')
 end
