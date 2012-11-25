@@ -17,9 +17,13 @@
           %td=""#(phone.imgurl)? (image_tag phone.imgurl) : ""
           %td= phone.brand
           %td= link_to "#{phone.name}", phone_path(phone)
-          %td
-            %h3= phone.overallRatings().to_s+"%"
-
+          %td 
+            %span
+              =link_to image_stars(phone.num_stars()) ,  phone_path(phone)  
+              = phone.overallRatings().to_s+"%"
+            %div.float
+              =link_to image_stars(phone.num_stars()) ,  phone_path(phone)
+              dfdfd
 
 
 = link_to_unless  @current_page==1, "Previous Page",  phones_path(:show=> @num_params, :sort_by => @sort_by_params, :page=>(@current_page-1), :ratings => @ratings_params, :brands => @brands_params, :os => @os_params ) 
@@ -37,12 +41,19 @@
       = 'Sort by:'
       = select :sort_by, :word, @select, {}, :onchange => "$('#side_col').submit()"
     %section#Brands
-      %h4 Manufacturer
-      - @brands. each do |b|
-        = check_box_tag name= "brands[#{b}]", value = 1, checked = @brands_checked[b], :class => "ratings", :onclick => "$('#side_col').submit()"
-        = "#{b}"
-        %br
-      = link_to "#{@brands_see}", phones_path(:all_brands=>@brands_all, :sort_by=> @sort_by_params, :page=>@current_page, :ratings => @ratings_params, :brands => @brands_params, :os => @os_params )
+      %h4 Manufacturer          
+      %section.Brands1
+        - @brands1. each do |b|
+          = check_box_tag name= "brands[#{b}]", value = 1, checked = @brands_checked[b], :class => "ratings", :onclick => "$('#side_col').submit()"
+          = "#{b}"
+          %br
+      %section.Brands2
+        - @brands2. each do |b|
+          = check_box_tag name= "brands[#{b}]", value = 1, checked = @brands_checked[b], :class => "ratings", :onclick => "$('#side_col').submit()"
+          = "#{b}"
+          %br
+      %p See more manufacturers
+      
     %section#OSs
       %h4 Operating System
       - @os.each do |s|

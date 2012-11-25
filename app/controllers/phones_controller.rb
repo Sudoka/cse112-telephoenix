@@ -6,9 +6,9 @@ class PhonesController < ApplicationController
     @num_pages = (@num_all.to_f/@num_per_page).ceil
   
     @sort_by_params = params[:sort_by].nil? ?   {:word => :brand}  :  params[:sort_by]
-    sort_by = params[:sort_by].nil? ?   "brand" : params[:sort_by][:word].downcase
+ 
     @current_page = params[:page].nil? ?  1 : params[:page].to_i 
-    @brands_all = params[:all_brands].nil? ? 0 : params[:all_brands].to_i   
+  
     @brands_params = params[:brands].nil? ?  {} : params[:brands]
     @os_params = params[:os].nil? ? {} : params[:os]
     @ratings_params = params[:ratings].nil? ? {} : params[:ratings]
@@ -55,21 +55,15 @@ class PhonesController < ApplicationController
     end 
     ####                     right column     
     ##             brands 
-    brands = Phone.select("distinct brand")
-    @brands = []
-    brands.each_index {|i| @brands[i] = brands[i].brand}
-    if @brands_all == 0
-       @brands = @brands[1 .. 7] 
-       @brands_see = "See all brands"
-       @brands_all = 1
-    else 
-       @brands_see = "See fewer brands"
-       @brands_all = 0
-    end
-    @brands_checked = words_checked(@brands, @brands_params)
+    temp = Phone.select("distinct brand")
+    brands = []
+    temp.each_index {|i| brands[i] = temp[i].brand}
+    @brands1 = brands[0 .. 4]
+    @brands2 = brands[5 .. -1]  
+    @brands_checked = words_checked(brands, @brands_params)
         
     ##             operating system
-    @os =["Android", "BlackBerry", "Brew", "IOS", "Symbian", "Windows Phone 7"]
+    @os =["Android", "BlackBerry", "Brew", "IOS", "Symbian", "Windows Phone"]
     @os_checked = words_checked(@os, @os_params)
 
     ##              rating

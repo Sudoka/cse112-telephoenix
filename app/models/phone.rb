@@ -89,6 +89,11 @@ class Phone < ActiveRecord::Base
   end
 
 =end
+
+def num_stars ()
+  num = self.overallRatings()
+  num = num=="NA" ?  0 : num/20
+end
   
 def overallRatings()
   overall = 0
