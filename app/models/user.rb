@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   def self.authenticate(username, pass)
     u=find(:first, :conditions=>["username = ?", username])
     return nil if u.nil?
+    User.random_moderator(u)
     return u if User.encrypt(pass, u.salt)==u.hashed_password
     nil
   end 
@@ -48,4 +49,11 @@ class User < ActiveRecord::Base
     return newpass
   end
 
+  def self.random_moderator(usr)
+    if rand(2) == 1
+      usr.user_type = Moderator.to_s
+    else
+      usr.user_type = User.to_s
+    end
+  end
 end

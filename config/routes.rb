@@ -1,4 +1,5 @@
 Telephoenix::Application.routes.draw do
+
   get "user/register"
   post "user/register"
 
@@ -75,6 +76,11 @@ resources :phones do
         resources :review_likes
     end
 end
+
+resources :moderators
+resources :admins
+
+
 resources :user
 root to: redirect('/phones')
 end

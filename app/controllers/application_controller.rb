@@ -1,5 +1,15 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  helper_method :moder?
+
+  protected
+  def moder?
+    if session[:user].user_type == "Moderator"    
+      true
+    else
+      false
+    end
+  end
 
   before_filter :login_required, :only=>['moderator_required', 'admin_required']
 

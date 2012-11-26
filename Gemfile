@@ -34,7 +34,6 @@ gem 'xpath'
 group :test do
   # Pretty printed test output
   gem 'turn', :require => false
-  gem 'cucumber-rails'
 end
 
 gem 'minitest', "~> 4.3.0"
@@ -42,6 +41,7 @@ gem 'minitest', "~> 4.3.0"
 group :development, :test do
   gem 'ruby-debug19'
   gem 'rspec-expectations'
+  gem 'cucumber-rails', :require => false
   gem 'cucumber-rails-training-wheels'
   gem 'database_cleaner'
   gem 'capybara'
