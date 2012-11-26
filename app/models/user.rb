@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   #make_flagr
   #make_flag :flag_once => true
   attr_accessible :username, :email, :password, :password_confirmation, :ip_address
-  attr_protected :id, :salt
+  attr_protected :id, :salt, :user_type
   attr_accessor :password, :password_confirmation
   validates_length_of :username, :password, :within => 5..40
   validates_presence_of :username, :email, :password, :password_confirmation, :salt

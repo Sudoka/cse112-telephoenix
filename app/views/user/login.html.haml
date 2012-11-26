@@ -1,6 +1,6 @@
-%h2 <center>Login
+%h2 Login
 
-<center>
+
 = form_tag user_login_path, method: :post do
   = label :user, :username, "Username"
   = text_field :user, :username
@@ -9,5 +9,4 @@
   = password_field :user, :password
 
   = submit_tag "Login"
-  %p
   = link_to "Register", user_register_path

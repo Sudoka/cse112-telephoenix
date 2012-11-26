@@ -4,6 +4,7 @@ class UserController < ApplicationController
   
   def register
     @user = User.new(params[:user])
+    @user.user_type = "user"
     if request.post?
       if @user.save
         session[:user] = User.authenticate(@user.username, @user.password)
