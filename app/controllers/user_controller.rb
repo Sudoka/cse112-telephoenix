@@ -33,4 +33,9 @@ class UserController < ApplicationController
     redirect_to :action => "login"
   end
 
+  def show
+    @user = User.find(params[:id])
+    @reviews = Review.find_all_by_phone_id(params[:id])
+  end
+
 end
