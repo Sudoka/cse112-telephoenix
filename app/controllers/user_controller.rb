@@ -19,7 +19,7 @@ class UserController < ApplicationController
     if request.post?
       if session[:user] = User.authenticate(params[:user][:username], params[:user][:password])
         flash[:message] = "Login successful"
-        redirect_to_stored
+        redirect_to moderators_path
       else
         flash[:warning] = "Login unsuccessful"
       end
