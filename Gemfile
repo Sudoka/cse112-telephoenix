@@ -29,8 +29,21 @@ gem 'jquery-rails'
 
 gem 'haml'
 gem 'nokogiri'
+gem 'xpath'
 
 group :test do
   # Pretty printed test output
   gem 'turn', :require => false
+end
+
+gem 'minitest', "~> 4.3.0"
+
+group :development, :test do
+  gem 'ruby-debug19'
+  gem 'rspec-expectations'
+  gem 'cucumber-rails'
+  gem 'cucumber-rails-training-wheels'
+  gem 'database_cleaner'
+  gem 'capybara'
+  gem 'launchy'
 end
