@@ -71,6 +71,7 @@ Telephoenix::Application.routes.draw do
 resources :phones do
     resources :reviews do
         resources :comments
+        resources :review_likes
     end
 end
 root to: redirect('/phones')
