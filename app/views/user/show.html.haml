@@ -13,9 +13,7 @@
         %tr
           %td= "\t"
           %td= review.review_text.to_s
-          %td
-          =button_to "Like"
-
+          %td=link_to 'Like'
           %td= link_to "View Comments (" + review.comments.count.to_s + ")", phone_review_path(review.phone, review)
 
 

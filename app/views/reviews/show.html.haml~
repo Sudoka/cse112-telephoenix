@@ -5,6 +5,9 @@
   %li= @review.user.username.to_s + ": "
   %li= @review.rating.to_s
   %li= @review.review_text
+  - if (session[:user] == @review.user || session[:user].user_type == ("admin" || "mod")) 
+    link_to "Edit", edit_phone_review_path(@review.phone, @review)
+
 
 %table#comments
   %col{:width => "200px"}/
@@ -14,7 +17,9 @@
     %tbody
       - @comments.each do |comment|
         %tr
-          %td= link_to comment.user.username.to_s, user_path(comment.user) + "Says: "
+          %td
+            = link_to comment.user.username.to_s, user_path(comment.user) 
+            = "Says: "
         %tr
           %td= "\t"
           %td= comment.comment_text

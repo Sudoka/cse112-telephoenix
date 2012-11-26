@@ -35,7 +35,7 @@ class UserController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @reviews = Review.find_all_by_phone_id(params[:id])
+    @reviews = Review.find_all_by_user_id(params[:id])
   end
 
 end
