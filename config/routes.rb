@@ -8,10 +8,9 @@ Telephoenix::Application.routes.draw do
 
   get "user/logout"
 
-  delete "user/delete"
+  get "user/delete"
 
   get "user/edit"
-
 
 
   # The priority is based upon order of creation:
@@ -81,5 +80,7 @@ end
 resources :moderators
 resources :admins
 
+
+resources :user
 root to: redirect('/phones')
 end

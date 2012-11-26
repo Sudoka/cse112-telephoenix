@@ -28,4 +28,10 @@ class CommentsController < ApplicationController
     redirect_to phone_review_path(@review.phone, @review)
   end
 
+  def destroy
+    Comment.find(params[:id]).destroy
+    redirect_to moderators_path
+  end
+
+
 end

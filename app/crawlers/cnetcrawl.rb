@@ -1,6 +1,7 @@
 #Script is able to crawl CNET professional reviews
 class CNETCrawl
   
+def crawl
   #Load required libraries
   require 'nokogiri'
   require 'open-uri'
@@ -64,4 +65,5 @@ class CNETCrawl
     page = page+1
     url = "http://reviews.cnet.com/4566-6454_7-0-"+page.to_s+".html?rpp=30"
   end
+end
 end

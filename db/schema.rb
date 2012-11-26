@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(:version => 20121125193252) do
     t.string   "testing"
     t.string   "salt"
     t.string   "ip_address"
+    t.string   "user_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

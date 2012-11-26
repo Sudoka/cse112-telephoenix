@@ -8,6 +8,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :testing
       t.string :salt
       t.string :ip_address
+      t.string :user_type
 
       t.timestamps
     end

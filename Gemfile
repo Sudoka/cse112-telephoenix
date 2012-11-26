@@ -6,7 +6,7 @@ gem 'rails', '3.1.0'
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
-
+gem 'make_flaggable', :git => 'git://github.com/cavneb/make_flaggable.git'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -29,8 +29,21 @@ gem 'jquery-rails'
 
 gem 'haml'
 gem 'nokogiri'
+gem 'xpath'
 
 group :test do
   # Pretty printed test output
   gem 'turn', :require => false
+end
+
+gem 'minitest', "~> 4.3.0"
+
+group :development, :test do
+  gem 'ruby-debug19'
+  gem 'rspec-expectations'
+  gem 'cucumber-rails', :require => false
+  gem 'cucumber-rails-training-wheels'
+  gem 'database_cleaner'
+  gem 'capybara'
+  gem 'launchy'
 end
