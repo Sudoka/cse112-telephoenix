@@ -1,4 +1,5 @@
 Telephoenix::Application.routes.draw do
+
   get "user/register"
   post "user/register"
 
@@ -7,7 +8,7 @@ Telephoenix::Application.routes.draw do
 
   get "user/logout"
 
-  get "user/delete"
+  delete "user/delete"
 
   get "user/edit"
 

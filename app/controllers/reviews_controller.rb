@@ -29,4 +29,10 @@ class ReviewsController < ApplicationController
     redirect_to phone_path(@phone)
   end
 
+  def edit
+    @phone = Phone.find(params[:phone_id])
+    @user = current_user
+  end
+
+
 end

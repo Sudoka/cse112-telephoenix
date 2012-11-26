@@ -16,5 +16,15 @@
         %tr
           %td= comment.user.username + " Says: "
         %tr
+        - if moder?
+          %td= link_to "Delete User", user_delete_path(comment.user.id), :confirm => "Are you sure?", :method => :delete
+        %tr  
           %td= "\t"
           %td= comment.comment_text
+        
+        - if moder?
+          %td= "\t"
+          %td= link_to "Edit Post"
+          %td= link_to "Delete Post"
+
+
