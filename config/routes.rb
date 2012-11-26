@@ -74,5 +74,6 @@ resources :phones do
         resources :review_likes
     end
 end
+resources :user
 root to: redirect('/phones')
 end
