@@ -12,18 +12,19 @@
       %th Brand
       %th Name
       %th Rating
-      - @phones.each do |phone|
-        %tr
-          %td=""#(phone.imgurl)? (image_tag phone.imgurl) : ""
-          %td= phone.brand
-          %td= link_to "#{phone.name}", phone_path(phone)
-          %td 
-            %span
-              =link_to image_stars(phone.num_stars()) ,  phone_path(phone)  
-              = phone.overallRatings().to_s+"%"
-            %div.float
-              =link_to image_stars(phone.num_stars()) ,  phone_path(phone)
-              dfdfd
+      -if !@phones.nil?
+        -@phones.each do |phone|
+          %tr
+            %td=""#(phone.imgurl)? (image_tag phone.imgurl) : ""
+            %td= phone.brand
+            %td= link_to "#{phone.name}", phone_path(phone)
+            %td 
+              %span
+                =link_to image_stars(phone.num_stars()) ,  phone_path(phone)  
+                = phone.overallRatings().to_s+"%"
+              %div.float
+                =link_to image_stars(phone.num_stars()) ,  phone_path(phone)
+                dfdfd
 
 
 = link_to_unless  @current_page==1, "Previous Page",  phones_path(:show=> @num_params, :sort_by => @sort_by_params, :page=>(@current_page-1), :ratings => @ratings_params, :brands => @brands_params, :os => @os_params ) 

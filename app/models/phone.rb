@@ -12,11 +12,11 @@ class Phone < ActiveRecord::Base
     find(:all, :conditions => ['brand LIKE ?', search])
   end
   
-  def self.phones_on_page (args={})
+  def self.phones_choosen (args={})
       ##disply para
       sort_by = args[:sort_by]
-      current_page = args[:current_page]
-      num_per_page = args[:num_per_page]
+     # current_page = args[:current_page]
+     # num_per_page = args[:num_per_page]
       ##filter  para
       brands = args[:brands]
       os = args[:os]
@@ -25,11 +25,18 @@ class Phone < ActiveRecord::Base
       phones = self.filter_by_brand(brands)&self.filter_by_os(os)&self.filter_by_rating(rating)
       phones = self.sort_by(phones, sort_by)      
       ##phones on page
+     # start = (current_page-1)*num_per_page+1
+     # tail = [self.count, current_page*num_per_page].min          
+     # phones[start .. tail]
+  end
+  
+  def self.phones_on_page (phones, current_page, num_per_page)
       start = (current_page-1)*num_per_page+1
       tail = [self.count, current_page*num_per_page].min          
       phones[start .. tail]
+       
   end
-  
+
   def self.filter_by_brand (brands)  # brands=["brand1", "brand2"]      
       phones = brands.empty? ?  self.all : self.where(:brand => brands)            
   end
