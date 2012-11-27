@@ -11,7 +11,7 @@ class PhonesController < ApplicationController
     @brands_params = params[:brands].nil? ?  {} : params[:brands]
     @os_params = params[:os].nil? ? {} : params[:os]
     @ratings_params = params[:ratings].nil? ? {} : params[:ratings]
-    #debugger
+ 
     ####fetch data: @sort_by is "brand"/"rating" 
     sort_by = params[:sort_by].nil? ?   "brand" : params[:sort_by][:word].downcase
     brands = @brands_params.keys

@@ -59,6 +59,7 @@ $(document).ready ->
     hideTimer = setTimeout -> 
       win.animate({opacity:0, height:'hide'}, "normal")
     , hideDelay   
+    alert 'o'
   )
 
 

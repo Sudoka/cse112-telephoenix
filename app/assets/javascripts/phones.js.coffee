@@ -50,7 +50,7 @@ $(document).ready ->
   ->
     clearTimeout(hideTimer) if hideTimer
     $(this).animate({opacity:1, height:'show'}, "normal") 
-    alert 's'
+   
   )
   
   $('#phones div').live('mouseout',
@@ -59,7 +59,7 @@ $(document).ready ->
     hideTimer = setTimeout -> 
       win.animate({opacity:0, height:'hide'}, "normal")
     , hideDelay   
-    alert 'o'
+   
   )
 
 
