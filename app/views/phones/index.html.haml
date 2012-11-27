@@ -15,7 +15,7 @@
       -if !@phones.nil?
         -@phones.each do |phone|
           %tr
-            %td=""#(phone.imgurl)? (image_tag phone.imgurl) : ""
+            %td= (phone.imgurl)? (image_tag phone.imgurl) : ""
             %td= phone.brand
             %td= link_to "#{phone.name}", phone_path(phone)
             %td 

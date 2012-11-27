@@ -1,5 +1,5 @@
 %h2= @phone.brand + ' ' + @phone.name
-= #(@phone.imgurl) ? (image_tag @phone.imgurl) : ""
+= (@phone.imgurl) ? (image_tag @phone.imgurl) : ""
 %p= link_to "Back", phones_path
 
 %ul#tags
