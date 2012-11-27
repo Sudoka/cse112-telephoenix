@@ -73,9 +73,11 @@ Telephoenix::Application.routes.draw do
 resources :phones do
     resources :reviews do
         resources :comments
-        resources :review_likes
     end
 end
+
+match "/review_likes/new/:review_id/:value"=> "review_likes#new"
+resources :review_likes
 
 resources :moderators
 resources :admins
