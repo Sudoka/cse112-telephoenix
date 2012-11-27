@@ -67,9 +67,12 @@ class PhonesController < ApplicationController
     @os_checked = words_checked(@os, @os_params)
 
     ##              rating
-    @ratings =["4","3","2","1"]   
-    
+    @ratings =["4","3","2","1"]      
     @ratings_checked = words_checked(@ratings, @ratings_params)
+    ##              number of phones when checked
+    
+
+
    
   end
 
