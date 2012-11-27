@@ -17,19 +17,22 @@
   %col{:width => "200px"}
   %thead
     %tr
-      %th Pro Reviews
       %th TelePhoenix User Reviews
       %th= link_to "New Review", new_phone_review_path(@phone)
     %tbody
       - @reviews.each do |review|
         %tr
           %td= "Rating: " + review.rating.to_s 
-          %td= link_to "User: " + review.user.username.to_s, user_path(review.user_id)
+          %td
+            = "User: "
+            = link_to review.user.username.to_s, user_path(review.user)
         %tr
           %td= "\t"
           %td= review.review_text.to_s
-          %td=button_to "Like"
+          %td=link_to 'Like'
 
           %td= link_to "View Comments (" + review.comments.count.to_s + ")", phone_review_path(review.phone, review)
+
+
 
       

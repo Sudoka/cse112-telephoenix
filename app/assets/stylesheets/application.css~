@@ -59,7 +59,9 @@ div#currentuser a {
 color: white;
 }
 
+<<<<<<< HEAD
 
+=======
 label {
 float:left;
 clear:left;
@@ -79,4 +81,4 @@ margin-left:20px;
 input[type=submit] {
 clear:both;
 }
-
+>>>>>>> dbeaf172bc1608dcccd10de4ad39e319d47aba12

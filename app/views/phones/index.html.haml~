@@ -37,7 +37,7 @@
 %nav#R_col{:align => "right"}
   = form_tag phones_path, :method => :get, :id =>"side_col" do
     %section#Sort       
-      = label :show, :number, "Show"
+      
       = select :show, :number, @select_num, {}, :onchange => "$('#side_col').submit()"
       = label :sort_by, :word, "Sort by"
       = select :sort_by, :word, @select, {}, :onchange => "$('#side_col').submit()"

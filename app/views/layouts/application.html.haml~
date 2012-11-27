@@ -1,0 +1,37 @@
+!!! 5
+%html
+  %head
+    %title TelePhoenix
+    = stylesheet_link_tag 'application'
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+
+  %body
+   
+    %div#headbar
+      = image_tag 'tplogo.png'
+      %div#currentuser
+        - if session[:user]
+          = "Hello "+session[:user][:username]+"!"
+          = link_to "Logout", user_logout_path
+        - else
+          = link_to "Login", user_login_path
+          |
+          = link_to "Register", user_register_path
+    %div#navbar
+      = link_to "Home"
+      = link_to "About"
+      = link_to "Contact"
+      = link_to "Browse", phones_path
+      = form_tag phones_path :class => "navbar-search pull-left", :method => :get do
+        = text_field_tag :name, nil, :class => "search-query span3", :placeholder => "Search"
+      %div#navClear
+    - if flash[:message]
+      %div#message
+        = flash[:message]
+    - if flash[:warning]
+      %div#warning
+        = flash[:warning]
+    = yield
+
+

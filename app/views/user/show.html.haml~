@@ -1,0 +1,21 @@
+%h2= @user.username
+
+%table#reviews
+  %col{:width => "200px"}
+  %thead
+    %tbody
+      - @reviews.each do |review|
+        %tr
+          %td= "Rating: " + review.rating.to_s
+          %td
+            = "Phone: "
+            = link_to review.phone.name.to_s, phone_path(review.phone)
+        %tr
+          %td= "\t"
+          %td= review.review_text.to_s
+          %td
+          =button_to "Like"
+
+          %td= link_to "View Comments (" + review.comments.count.to_s + ")", phone_review_path(review.phone, review)
+
+
