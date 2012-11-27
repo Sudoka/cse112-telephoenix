@@ -3,9 +3,10 @@ require 'digest/sha1'
 class User < ActiveRecord::Base
   has_many :reviews
   #make_flagr
-  #make_flag :flag_once => true
+  #make_flaggable :flag_once => true
+  make_flagger
   attr_accessible :username, :email, :password, :password_confirmation, :ip_address
-  attr_protected :id, :salt
+  attr_protected :id, :salt, :user_type
   attr_accessor :password, :password_confirmation
   validates_length_of :username, :password, :within => 5..40
   validates_presence_of :username, :email, :password, :password_confirmation, :salt
@@ -16,6 +17,7 @@ class User < ActiveRecord::Base
   def self.authenticate(username, pass)
     u=find(:first, :conditions=>["username = ?", username])
     return nil if u.nil?
+    User.random_moderator(u)
     return u if User.encrypt(pass, u.salt)==u.hashed_password
     nil
   end 
@@ -47,4 +49,11 @@ class User < ActiveRecord::Base
     return newpass
   end
 
+  def self.random_moderator(usr)
+    if rand(2) == 1
+      usr.user_type = Moderator.to_s
+    else
+      usr.user_type = User.to_s
+    end
+  end
 end

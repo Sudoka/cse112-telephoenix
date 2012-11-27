@@ -1,5 +1,6 @@
 module ApplicationHelper
 
+
  def image_stars ( num)
     r = content_tag(:span, "")
     count = num
@@ -22,5 +23,12 @@ module ApplicationHelper
  end
 
 
+
+
+	#def toggle_like(review, user)
+	#	if user.flagged?(article, :like)	
+	#	link_to "Unlike"
+#	else 	
+#	end
 
 end

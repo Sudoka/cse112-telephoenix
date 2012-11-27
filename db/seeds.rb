@@ -28,3 +28,4 @@ Tag.create(phone: p7, key: 'Smartphone', value: 'no')
 Tag.create(phone: p7, key: 'Keyboard', value: 'Physical Sliding')
 Tag.create(phone: p8, key: 'Operating System', value: 'Android 4.0 (Ice Cream Sandwich)')
 
+User.create(username: 'admin', password: 'admin', password_confirmation: 'admin', email: 'admin@admin.com')

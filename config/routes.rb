@@ -1,4 +1,5 @@
 Telephoenix::Application.routes.draw do
+
   get "user/register"
   post "user/register"
 
@@ -10,6 +11,7 @@ Telephoenix::Application.routes.draw do
   get "user/delete"
 
   get "user/edit"
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -71,7 +73,14 @@ Telephoenix::Application.routes.draw do
 resources :phones do
     resources :reviews do
         resources :comments
+        resources :review_likes
     end
 end
+
+resources :moderators
+resources :admins
+
+
+resources :user
 root to: redirect('/phones')
 end

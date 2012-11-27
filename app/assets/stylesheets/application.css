@@ -60,3 +60,23 @@ color: white;
 }
 
 
+label {
+float:left;
+clear:left;
+width:160px;
+}
+input, select {
+float:left;
+}
+
+div#navbar input {
+float:none;
+}
+form a {
+float:left;
+margin-left:20px;
+}
+input[type=submit] {
+clear:both;
+}
+
