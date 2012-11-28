@@ -5,6 +5,7 @@ class UserController < ApplicationController
   def register
     @user = User.new(params[:user])
     @user.user_type = "user"
+    @user.delay.signup_confirmation
     if request.post?
       if @user.save
         session[:user] = User.authenticate(@user.username, @user.password)
@@ -25,7 +26,7 @@ class UserController < ApplicationController
     if request.post?
       if session[:user] = User.authenticate(params[:user][:username], params[:user][:password])
         flash[:message] = "Login successful"
-        debugger
+        #debugger
         if current_user.user_type == "Moderator"
           redirect_to moderators_path
         else

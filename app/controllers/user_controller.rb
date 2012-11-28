@@ -5,6 +5,8 @@ class UserController < ApplicationController
   def register
     @user = User.new(params[:user])
     @user.user_type = "user"
+    #send email for sign up
+    @user.delay.signup_confirmation
     if request.post?
       if @user.save
         session[:user] = User.authenticate(@user.username, @user.password)

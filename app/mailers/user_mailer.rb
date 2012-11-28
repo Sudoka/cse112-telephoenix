@@ -16,8 +16,9 @@ class UserMailer < ActionMailer::Base
   #
   #   UserMailer.comment_review(user).deliver
   #
-  def comment_review ( user ) 
-    @user = user
-    mail :to => user.email, :subject => "Comment Remind"
+  def comment_review ( reviewer, commenter ) 
+    @reviewer = reviewer
+    @commenter = commenter
+    mail :to => reviewer.email, :subject => "Comment Remind"
   end
 end

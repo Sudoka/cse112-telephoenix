@@ -60,7 +60,4 @@ class User < ActiveRecord::Base
   def comment_remind ( commenter)
       UserMailer.comment_review(self, commenter).deliver
   end
-  def signup_confirmation
-      UserMailer.signup_confirmation(self).deliver
-  end
 end
