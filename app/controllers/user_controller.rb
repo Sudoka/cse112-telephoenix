@@ -25,6 +25,7 @@ class UserController < ApplicationController
     if request.post?
       if session[:user] = User.authenticate(params[:user][:username], params[:user][:password])
         flash[:message] = "Login successful"
+        #debugger
         if current_user.user_type == "Moderator"
           redirect_to moderators_path
         else

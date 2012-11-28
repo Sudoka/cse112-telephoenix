@@ -1,0 +1,6 @@
+= "Hi, #{@user.username}"
+%section
+  %p Some other user commented on one of your reviews, you can see the details following the link below
+  = link_to "Telephoneix", phones_path
+%br
+Group of telephoneix

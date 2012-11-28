@@ -53,6 +53,7 @@ class ApplicationController < ActionController::Base
 
   #Redirects to the stored link that was last attempted.
   def redirect_to_stored
+      #debugger
     if return_to = session[:return_to]
       session[:return_to] = nil
       redirect_to return_to
