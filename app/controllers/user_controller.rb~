@@ -5,12 +5,14 @@ class UserController < ApplicationController
   def register
     @user = User.new(params[:user])
     @user.user_type = "user"
-    @user.delay.signup_confirmation
+   
     if request.post?
       if @user.save
         session[:user] = User.authenticate(@user.username, @user.password)
         flash[:message] = "Signup successful"
-        
+      
+        #send email for sign up
+        @user.delay.signup_confirmation
         if current_user.user_type == "Moderator"
           redirect_to moderators_path
         else
@@ -24,9 +26,10 @@ class UserController < ApplicationController
 
   def login
     if request.post?
+     
       if session[:user] = User.authenticate(params[:user][:username], params[:user][:password])
         flash[:message] = "Login successful"
-        #debugger
+       
         if current_user.user_type == "Moderator"
           redirect_to moderators_path
         else
@@ -43,7 +46,27 @@ class UserController < ApplicationController
     flash[:message] = "Logged out"
     redirect_to :action => "login"
   end
+  
+  def forget_password
+    if request.post?
+       user = User.find_by_email params[:user][:email]
+   
+       if  user.nil? == false
+           
+           user.delay.send_new_password
+           flash[:message] = "You new password is being sended"
+           redirect_to phones_path
+       else
+           flash[:message] = "Invalid email"
+           redirect_to  user_forget_password_path
+       end
+       
 
+      
+    end
+  
+  end
+  
   def destroy
     User.find(params[:id]).destroy
     redirect_to moderators_path, :notice => "The post has been deleted"

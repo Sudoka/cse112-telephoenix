@@ -11,5 +11,5 @@
   = submit_tag "Login"
   = link_to "Register", user_register_path
   %br 
-  %section
-    = link_to "forget password?", user_forget_password_path
+  %br
+  = link_to "forget password?", user_forget_password_path

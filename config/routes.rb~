@@ -12,8 +12,7 @@ Telephoenix::Application.routes.draw do
 
   get "user/edit"
 
-  get "user/forget_password" 
-  post "user/forget_password" 
+  get "user/forget_password"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

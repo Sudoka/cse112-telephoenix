@@ -28,11 +28,18 @@ class User < ActiveRecord::Base
     self.hashed_password = User.encrypt(@password, self.salt)
   end
 
-  def send_new_password
+  def change_new_password
     new_pass = User.random_string(10)
-    self.password = self.password_confirmation = new_pass
-    self.save
-    Notifications.deliver_forgot_password(self.email, self.username, new_pass)
+    self.password = new_pass
+    self.password_confirmation = new_pass
+    self.save!
+    #Notifications.deliver_forgot_password(self.email, self.username, new_pass)
+    #debugger
+    self.delay.send_password(self, new_pass)
+  end
+  
+  def send_password (user, password)
+      UserMailer.send_password(user, password).deliver
   end
 
   protected

@@ -11,6 +11,11 @@ class UserMailer < ActionMailer::Base
     mail :to => user.email, :subject => "Sign Up Confirmation"
   end
 
+  def send_password (user, password)
+    @user = user
+    @password = password
+    mail :to => user.email, :subject => "New password"
+  end
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #
