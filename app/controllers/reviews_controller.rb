@@ -20,7 +20,7 @@ class ReviewsController < ApplicationController
       redirect_to phone_path(@phone)
     else      
       @review = @phone.reviews.build
-      @review.user = @user     
+      @review.user = @user   
       respond_with(@review)
       
     end
@@ -31,7 +31,10 @@ class ReviewsController < ApplicationController
     @user = current_user
     @review = @phone.reviews.build(params[:review])
     @review.user = @user
-    @review.save
+    @review.num_likes =0
+    @review.num_dislikes =0
+    @review.save!
+    debugger
     redirect_to phone_path(@phone)
   end
 

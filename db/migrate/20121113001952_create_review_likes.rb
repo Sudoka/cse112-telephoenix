@@ -3,7 +3,8 @@ class CreateReviewLikes < ActiveRecord::Migration
     create_table :review_likes do |t|
     	t.references :user
     	t.references :review
-    	t.integer :like
+      # value of like{"like" "unlike"}
+      t.string :value
     	t.timestamps
     end
   end
