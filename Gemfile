@@ -21,9 +21,12 @@ group :assets do
 end
 
 gem 'jquery-rails'
-
+# background
 gem 'delayed_job_active_record'
 gem 'daemons'
+#  facebook
+gem 'omniauth-facebook'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

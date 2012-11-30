@@ -12,9 +12,10 @@
       = image_tag 'tplogo.png'
       %div#currentuser
         - if session[:user]
-          = "Hello "+session[:user][:username]+"!"
-          = link_to "Logout", user_logout_path
+          = "Hello #{session[:user].username} !"
+          = link_to "Logout", user_logout_path, :id => 'logout'
         - else
+          = link_to "Login with Facebook", '/auth/facebook', :id => 'login'
           = link_to "Login", user_login_path
           |
           = link_to "Register", user_register_path

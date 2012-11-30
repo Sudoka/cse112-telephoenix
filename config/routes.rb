@@ -1,5 +1,8 @@
 Telephoenix::Application.routes.draw do
-
+  match 'auth/:provider/callback', to: 'omniauth#create'
+  match 'auth/failure', to: redirect('/')
+#  match 'signout', to: 'omniauth#destroy', as: 'signout'
+  
   get "user/register"
   post "user/register"
 

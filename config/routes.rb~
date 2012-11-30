@@ -1,5 +1,8 @@
 Telephoenix::Application.routes.draw do
-
+  match 'auth/:provider/callback', to: 'omniauth#create'
+  match 'auth/failure', to: redirect('/')
+  match 'signout', to: 'omniauth#destroy', as: 'signout'
+  
   get "user/register"
   post "user/register"
 
@@ -12,7 +15,8 @@ Telephoenix::Application.routes.draw do
 
   get "user/edit"
 
-  get "user/forget_password"
+  get "user/forget_password" 
+  post "user/forget_password" 
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
