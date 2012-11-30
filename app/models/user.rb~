@@ -47,7 +47,7 @@ class User < ActiveRecord::Base
   end
 
   def self.from_omniauth(auth)
-     #debugger
+   
      user = where(auth.slice(:provider, :uid)).first
      if user.nil?
         user = find_by_email auth.info.email

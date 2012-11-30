@@ -102,6 +102,10 @@ ActiveRecord::Schema.define(:version => 20121128150506) do
     t.string   "salt"
     t.string   "ip_address"
     t.string   "user_type"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "oauth_token"
+    t.datetime "oauth_expires_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
