@@ -12,8 +12,4 @@
         %td= comment.user
         %td= comment.review
         %td= comment.comment_texts
-        /%td
-        /=form_tag (@comment.like, :controller => "likes", :action => "update")do
-         / =hidden_field :id, comment.like.id
-          /=submit_tag "Like"
 

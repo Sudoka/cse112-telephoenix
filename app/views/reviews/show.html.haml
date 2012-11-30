@@ -17,10 +17,11 @@
     %tbody
       - @comments.each do |comment|
         %tr
+          %td= session[:user].user_type.to_s
           %td
             = link_to comment.user.username.to_s, user_path(comment.user) 
-            = "Says: "
-          %td= session[:user].user_type.to_s
+            = "Says:"
+          /%td= comment.comment_text
         %tr
         - if moder?
           %td= link_to "Delete User", :confirm => "Are you sure?", :method => :delete
