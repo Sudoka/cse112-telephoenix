@@ -1,8 +1,18 @@
 Telephoenix::Application.routes.draw do
+
   match 'auth/:provider/callback', to: 'omniauth#create'
   match 'auth/failure', to: redirect('/')
-  match 'signout', to: 'omniauth#destroy', as: 'signout'
+#  match 'signout', to: 'omniauth#destroy', as: 'signout'
   
+
+
+  get "static_pages/about"
+
+  get "static_pages/contact"
+
+  resources :likes
+
+
   get "user/register"
   post "user/register"
 

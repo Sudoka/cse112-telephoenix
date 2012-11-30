@@ -11,23 +11,39 @@ class ReviewLikesController < ApplicationController
     @like = ReviewLike.find(params[:id])
   end
 
+=begin
   def new
-    debugger
     @review = ReviewLike.find(params[:review_id])
     @user = current_user
     @like = @review.review_likes.build
     @like.user = @user
     @like.like = params[:value]
   end
+=end
+
 
   def create
-    @review = ReviewLike.find(params[:review_id])
-    @user = current_user
-    @like = @like.comments.build(params[:like])
-    @like.user = @user
-    @like.like = params[:value]
-    @like.save
-    redirect_to phone_path(@review.phone)
+    review_like=ReviewLike.where(:user_id =>current_user.id)
+    review = Review.find(params[:review_id])
+    if review_like.empty? 
+        if params[:value]=="like"
+           review.num_likes = review.num_likes+1
+           review.save!
+           review_like = review.review_like.build
+           review_like.value = params[:value]        
+           review_like.user = current_user
+           review_like.save!
+        else
+           review.num_dislikes = review.num_dislikes+1
+           review.save!
+           review_like = review.review_like.build
+           review_like.value = params[:value]
+           review_like.user = current_user
+           review_like.save!
+        end
+    end
+    redirect_to phone_path(review.phone)
+    #@user = current_user
   end
 
 end

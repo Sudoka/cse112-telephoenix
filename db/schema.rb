@@ -37,6 +37,30 @@ ActiveRecord::Schema.define(:version => 20121128150506) do
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
+  create_table "flaggings", :force => true do |t|
+    t.string   "flaggable_type"
+    t.integer  "flaggable_id"
+    t.string   "flagger_type"
+    t.integer  "flagger_id"
+    t.string   "flag"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "flaggings", ["flag", "flaggable_type", "flaggable_id"], :name => "index_flaggings_on_flag_and_flaggable_type_and_flaggable_id"
+  add_index "flaggings", ["flag", "flagger_type", "flagger_id", "flaggable_type", "flaggable_id"], :name => "access_flag_flaggings"
+  add_index "flaggings", ["flaggable_type", "flaggable_id"], :name => "index_flaggings_on_flaggable_type_and_flaggable_id"
+  add_index "flaggings", ["flagger_type", "flagger_id", "flaggable_type", "flaggable_id"], :name => "access_flaggings"
+
+  create_table "likes", :force => true do |t|
+    t.integer  "comment_id"
+    t.integer  "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "likes", ["comment_id"], :name => "index_likes_on_comment_id"
+
   create_table "phones", :force => true do |t|
     t.string   "name"
     t.string   "brand"
@@ -57,7 +81,7 @@ ActiveRecord::Schema.define(:version => 20121128150506) do
   create_table "review_likes", :force => true do |t|
     t.integer  "user_id"
     t.integer  "review_id"
-    t.boolean  "like"
+    t.string   "value"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -67,6 +91,8 @@ ActiveRecord::Schema.define(:version => 20121128150506) do
     t.integer  "rating"
     t.integer  "phone_id"
     t.string   "review_text"
+    t.integer  "num_likes"
+    t.integer  "num_dislikes"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

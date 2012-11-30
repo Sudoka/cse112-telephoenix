@@ -1,4 +1,4 @@
-!!! 5
+
 %html
   %head
     %title TelePhoenix
@@ -21,8 +21,8 @@
           = link_to "Register", user_register_path
     %div#navbar
       = link_to "Home"
-      = link_to "About"
-      = link_to "Contact"
+      = link_to "About" ,static_pages_about_path
+      = link_to "Contact",static_pages_contact_path
       = link_to "Browse", phones_path
       = form_tag phones_path :class => "navbar-search pull-left", :method => :get do
         = text_field_tag :name, nil, :class => "search-query span3", :placeholder => "Search"

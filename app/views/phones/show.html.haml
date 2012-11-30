@@ -22,15 +22,19 @@
     %tbody
       - @reviews.each do |review|
         %tr
-          %td= "Rating: " + review.rating.to_s 
+          %td= "Rating: " + review.rating.to_s
+          
           %td
             = "User: "
             = link_to review.user.username.to_s, user_path(review.user)
         %tr
           %td= "\t"
           %td= review.review_text.to_s
-          %td= button_to 'Like', :controller => "review_likes", :action => "new", :review_id => review.id, :value => 1, :method => "get"
+          /%td= #{}"Likes: " + "#{review.num_likes}" 
+          %td= button_to "#{review.num_likes} Likes", {:review_id =>review.id,  :value => "like",:method => "get", :action => "create", :controller => "review_likes" }
 
+          %td= button_to "#{review.num_dislikes} Unlikes", {:review_id =>review.id,  :value => "unlike",:method => "get", :action => "create", :controller => "review_likes" }
+                    
           %td= link_to "View Comments (" + review.comments.count.to_s + ")", phone_review_path(review.phone, review)
 
 
