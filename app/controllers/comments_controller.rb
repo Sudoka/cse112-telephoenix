@@ -16,6 +16,7 @@ class CommentsController < ApplicationController
     @user = current_user
     @comment = @review.comments.build
     @comment.user = @user
+    @comment.build_like
     respond_with(@comment)
   end
 

@@ -1,5 +1,7 @@
 Telephoenix::Application.routes.draw do
 
+  resources :likes
+
   get "user/register"
   post "user/register"
 

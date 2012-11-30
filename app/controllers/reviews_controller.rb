@@ -18,14 +18,15 @@ class ReviewsController < ApplicationController
     if Review.find_by_phone_id_and_user_id(@phone, @user) != nil
       flash[:warning] = "You can only write one review per phone"
       redirect_to phone_path(@phone)
-    else
+    else      
       @review = @phone.reviews.build
-      @review.user = @user
+      @review.user = @user     
       respond_with(@review)
+      
     end
   end
 
-  def create
+  def create   
     @phone = Phone.find(params[:phone_id])
     @user = current_user
     @review = @phone.reviews.build(params[:review])
@@ -35,7 +36,6 @@ class ReviewsController < ApplicationController
   end
 
   def edit
-<<<<<<< HEAD
     @review = Review.find(params[:id])
     if can_edit(@review.user)
       respond_with(@review)  
@@ -51,10 +51,6 @@ class ReviewsController < ApplicationController
     redirect_to phone_review_path(@review.phone, @review)
   end
 
-=======
-    @phone = Phone.find(params[:phone_id])
-    @user = current_user
-  end
 
 
   def destroy
@@ -63,5 +59,5 @@ class ReviewsController < ApplicationController
   end
 
 
->>>>>>> c1b0b56261c86ae4788ef0bd32ab2ab1cd405ec6
+
 end
