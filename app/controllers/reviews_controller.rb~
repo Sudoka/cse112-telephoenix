@@ -35,6 +35,7 @@ class ReviewsController < ApplicationController
   end
 
   def edit
+
     @review = Review.find(params[:id])
     if can_edit(@review.user)
       respond_with(@review)  
@@ -46,8 +47,17 @@ class ReviewsController < ApplicationController
 
   def update
     @review = Review.find(params[:id])
-    @reviw.update_attributes!(params[:review])
+    @review.update_attributes!(params[:review])
     redirect_to phone_review_path(@review.phone, @review)
   end
+
+
+
+
+  def destroy
+    Comment.find(params[:id]).destroy
+    redirect_to moderators_path
+  end
+
 
 end

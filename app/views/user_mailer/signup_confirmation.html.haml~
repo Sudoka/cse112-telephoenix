@@ -1,0 +1,6 @@
+= "Hi, #{@user.username}"
+%section
+  %p Thanks for signing up telephoneix, you can now login with the link below
+  = link_to "Telephoneix", phones_path
+%br
+Group of telephoneix

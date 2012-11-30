@@ -29,7 +29,7 @@
         %tr
           %td= "\t"
           %td= review.review_text.to_s
-          %td=link_to 'Like'
+          %td= button_to 'Like', :controller => "review_likes", :action => "new", :review_id => review.id, :value => 1, :method => "get"
 
           %td= link_to "View Comments (" + review.comments.count.to_s + ")", phone_review_path(review.phone, review)
 

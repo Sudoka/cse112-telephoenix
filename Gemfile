@@ -22,6 +22,8 @@ end
 
 gem 'jquery-rails'
 
+gem 'delayed_job_active_record'
+gem 'daemons'
 # Use unicorn as the web server
 # gem 'unicorn'
 

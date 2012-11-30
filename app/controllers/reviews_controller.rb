@@ -58,6 +58,4 @@ class ReviewsController < ApplicationController
     redirect_to moderators_path
   end
 
-
-
 end

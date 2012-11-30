@@ -11,7 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20121127215618) do
+=======
+ActiveRecord::Schema.define(:version => 20121128150506) do
+>>>>>>> 006b62677e51d2321bf9c65f5d226190b44ab86b
 
   create_table "comments", :force => true do |t|
     t.integer  "user_id"
@@ -21,16 +25,30 @@ ActiveRecord::Schema.define(:version => 20121127215618) do
     t.datetime "updated_at"
   end
 
+<<<<<<< HEAD
   create_table "flaggings", :force => true do |t|
     t.string   "flaggable_type"
     t.integer  "flaggable_id"
     t.string   "flagger_type"
     t.integer  "flagger_id"
     t.string   "flag"
+=======
+  create_table "delayed_jobs", :force => true do |t|
+    t.integer  "priority",   :default => 0
+    t.integer  "attempts",   :default => 0
+    t.text     "handler"
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+>>>>>>> 006b62677e51d2321bf9c65f5d226190b44ab86b
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+<<<<<<< HEAD
   add_index "flaggings", ["flag", "flaggable_type", "flaggable_id"], :name => "index_flaggings_on_flag_and_flaggable_type_and_flaggable_id"
   add_index "flaggings", ["flag", "flagger_type", "flagger_id", "flaggable_type", "flaggable_id"], :name => "access_flag_flaggings"
   add_index "flaggings", ["flaggable_type", "flaggable_id"], :name => "index_flaggings_on_flaggable_type_and_flaggable_id"
@@ -44,6 +62,9 @@ ActiveRecord::Schema.define(:version => 20121127215618) do
   end
 
   add_index "likes", ["comment_id"], :name => "index_likes_on_comment_id"
+=======
+  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
+>>>>>>> 006b62677e51d2321bf9c65f5d226190b44ab86b
 
   create_table "phones", :force => true do |t|
     t.string   "name"
