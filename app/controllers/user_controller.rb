@@ -78,4 +78,13 @@ class UserController < ApplicationController
     @reviews = Review.find_all_by_user_id(params[:id])
   end
 
+  def deleteUser
+    User.find(params[:id]).destroy
+  end
+
+  def demoteModerator
+    User.user_type = "not mod"
+    User.save
+  end
+
 end
