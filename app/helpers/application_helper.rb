@@ -22,8 +22,9 @@ module ApplicationHelper
     return r
  end
 
-
-
+ def space(num)
+    '&nbsp;'*num
+ end
 
 
 

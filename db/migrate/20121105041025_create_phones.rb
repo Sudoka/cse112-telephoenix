@@ -6,6 +6,9 @@ class CreatePhones < ActiveRecord::Migration
       t.string :brand
       t.string :imgurl
 
+      t.integer :num_reviews
+      t.integer :overall_rating   # -1, at the first time
+
       t.timestamps
     end
   end

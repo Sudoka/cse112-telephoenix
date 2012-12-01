@@ -18,47 +18,61 @@ $(document).ready ->
 
   ####  ----------float window
   hideDelay = 10
+  showDelay = 500
+  showTimer = null
   hideTimer = null
   
   $('#phones span img').live('mouseover',
   ->
     if hideTimer       
        clearTimeout(hideTimer)
+    if showTimer       
+       clearTimeout(showTimer)
    
     win = $(this).parent().parent().siblings('div')
     td = $(this)
+    td = $(this).parent()
     pos = td.offset()
     width = td.width()    
     win.css({
       left: (pos.left+width)+'px';
+      left: pos.left;
       top:(pos.top)+'px';
     })
-    win.animate({opacity:1, height:'show'}, "normal") 
+    showTimer = setTimeout ->     
+      win.animate({opacity:1, height:'show'}, "normal")
+    , showDelay  
     
     
   )
 
   $('#phones span img').live('mouseout',
   ->
+    if showTimer       
+       clearTimeout(showTimer)
+
     win = $(this).parent().parent().siblings('div')
     hideTimer = setTimeout ->     
-      win.animate({opacity:0, height:'hide'}, "normal")
+   #   win.animate({opacity:0, height:'hide'}, "normal")
+      win.css('display', 'none')
     , hideDelay    
   )
 
   $('#phones div').live('mouseover',
   ->
     clearTimeout(hideTimer) if hideTimer
-    $(this).animate({opacity:1, height:'show'}, "normal") 
-   
+   # $(this).animate({opacity:1, height:'show'}, "normal") 
+    win = $(this)
+    win.css('display', 'block')
   )
   
   $('#phones div').live('mouseout',
   ->
     win = $(this)
-    hideTimer = setTimeout -> 
-      win.animate({opacity:0, height:'hide'}, "normal")
-    , hideDelay   
+#    hideTimer = setTimeout -> 
+#    win.animate({opacity:0, height:'hide'}, "fast")
+    win.css('display', 'none')
+#    , hideDelay   
    
   )
 

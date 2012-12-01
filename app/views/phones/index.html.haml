@@ -12,19 +12,32 @@
       %th Brand
       %th Name
       %th Rating
-      -if !@phones.nil?
+      -if !@phones.empty?
         -@phones.each do |phone|
           %tr
             %td= (phone.imgurl)? (image_tag phone.imgurl) : ""
             %td= phone.brand
             %td= link_to "#{phone.name}", phone_path(phone)
             %td 
-              %span
+              %span.review
                 =link_to image_stars(phone.num_stars()) ,  phone_path(phone)  
                 = phone.overallRatings().to_s+"%"
+                = "(#{phone.reviews.count}  reviews)"
               %div.float
                 =link_to image_stars(phone.num_stars()) ,  phone_path(phone)
-                dfdfd
+                = phone.overallRatings().to_s+"%"
+                %br
+                %br
+                - reviews = (phone.reviews.order("num_likes DESC"))[0 .. 2]
+                - if !reviews.empty?
+                  -reviews.each do |review|
+                    %section
+                      = " \" #{review.review_text} \" "
+                      %br
+                      = (link_to "#{review.user.username}", user_path(review.user)) + content_tag(:span, (space(4)+'|'+space(4)+"#{review.num_likes} Likes").html_safe)
+                      
+                    %br
+ 
 
 
 = link_to_unless  @current_page==1, "Previous Page",  phones_path(:show=> @num_params, :sort_by => @sort_by_params, :page=>(@current_page-1), :ratings => @ratings_params, :brands => @brands_params, :os => @os_params ) 
@@ -32,7 +45,7 @@
 - @pages_bar.each do |p|
   = link_to_unless  @current_page==p||p=="...",  "#{p}", phones_path(:show=> @num_params, :sort_by=> @sort_by_params, :page=>p, :ratings => @ratings_params, :brands =>@brands_params, :os => @os_params ) 
 
-=link_to_unless  @current_page==@num_pages,  "Next Page", phones_path(:show=> @num_params, :sort_by=> @sort_by_params, :page=>(@current_page+1), :ratings => @ratings_params, :brands => @brands_params, :os => @os_params ) 
+=link_to_unless  @current_page==@num_pages||@num_pages==0,  "Next Page", phones_path(:show=> @num_params, :sort_by=> @sort_by_params, :page=>(@current_page+1), :ratings => @ratings_params, :brands => @brands_params, :os => @os_params ) 
 
 %nav#R_col{:align => "right"}
   = form_tag phones_path, :method => :get, :id =>"side_col" do
@@ -47,11 +60,13 @@
         - @brands1. each do |b|
           = check_box_tag name= "brands[#{b}]", value = 1, checked = @brands_checked[b], :class => "ratings", :onclick => "$('#side_col').submit()"
           = "#{b}"
+          = content_tag(:span, "    (#{@num_if_checked[b]})", :class => 'num_if_checked') 
           %br
       %section.Brands2
         - @brands2. each do |b|
           = check_box_tag name= "brands[#{b}]", value = 1, checked = @brands_checked[b], :class => "ratings", :onclick => "$('#side_col').submit()"
           = "#{b}"
+          = content_tag(:span, "   (#{@num_if_checked[b]})", :class => 'num_if_checked') 
           %br
       %p See more manufacturers
       
@@ -60,12 +75,14 @@
       - @os.each do |s|
         = check_box_tag name= "os[#{s}]", value = 1, checked = @os_checked[s], :class => "ratings", :onclick => "$('#side_col').submit()"
         = "#{s}"
+        = content_tag(:span, "      (#{@num_if_checked[s]})", :class => 'num_if_checked') 
         %br
     %section#Ratings
       %h4 Overall Rating
       - @ratings.each do |r|    
         = check_box_tag name= "ratings[#{r}]", value = 1, checked = @ratings_checked[r], :class => "ratings"
         = image_stars(r.to_i)+content_tag(:span, "&UP") 
+        = content_tag(:span, "      (#{@num_if_checked[r]})", :class => 'num_if_checked') 
         %br
      
 

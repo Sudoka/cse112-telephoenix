@@ -25,8 +25,9 @@ class Phone < ActiveRecord::Base
   end
   
   def self.phones_on_page (phones, current_page, num_per_page)
-      start = (current_page-1)*num_per_page+1
-      tail = [self.count, current_page*num_per_page].min          
+      start = (current_page-1)*num_per_page
+      tail = [self.count-1, current_page*num_per_page-1].min 
+          
       phones[start .. tail]
        
   end
@@ -35,7 +36,7 @@ class Phone < ActiveRecord::Base
       phones = brands.empty? ?  self.all : self.where(:brand => brands)            
   end
   
-  def self.filter_by_os (os) # os=['os1' , 'os2']
+  def self.filter_by_os (os) # os=['os1' , 'os2'], must be in an array
       phones = []
       if os.empty? 
         phones = self.all
@@ -69,6 +70,17 @@ class Phone < ActiveRecord::Base
       end
       
   end
+ 
+  def self.num_if_checked (phones, brands, os, ratings) #rating are determined  '4', '3', '2', '1'
+       ratings = ['4', '3', '2', '1']
+       num = {}
+       brands.each {|brand|  num[brand] = (filter_by_brand(brand)&phones).count }
+       os.each {|s| num[s] = (filter_by_os([s])&phones).count }
+       ratings.each {|rating| num[rating] = (filter_by_rating(20*rating.to_i)&phones).count }
+     
+ 
+       return num
+  end      
 
 =begin 
 

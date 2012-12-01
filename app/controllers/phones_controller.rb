@@ -19,7 +19,7 @@ class PhonesController < ApplicationController
     rating = @ratings_params.keys.empty? ? 0 : @ratings_params.keys[0].to_i*20   #make rating 0-100
     
     phones = Phone.phones_choosen :brands => brands, :os => os, :rating => rating, :sort_by => sort_by
-    
+   # debugger
     @num_all  = phones.count
     @num_pages = (@num_all.to_f/@num_per_page).ceil
     
@@ -72,9 +72,11 @@ class PhonesController < ApplicationController
     ##              rating
     @ratings =["4","3","2","1"]      
     @ratings_checked = words_checked(@ratings, @ratings_params)
-    ##              number of phones when checked
-    
-
+    ####              number of phones if checked
+    @num_if_checked = {}
+    @num_if_checked = Phone.num_if_checked(phones, brands, @os, @ratings)
+    ##             number of reviews
+    #debugger
 
    
   end
