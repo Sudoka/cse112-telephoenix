@@ -23,8 +23,10 @@ class ReviewLikesController < ApplicationController
 
 
   def create
-    review_like=ReviewLike.where(:user_id =>current_user.id)
+   
+    #search for where this user and if it exist where it works..
     review = Review.find(params[:review_id])
+    review_like=ReviewLike.where(:user_id =>current_user.id, :review_id => review.id )
     if review_like.empty? 
         if params[:value]=="like"
            review.num_likes = review.num_likes+1
