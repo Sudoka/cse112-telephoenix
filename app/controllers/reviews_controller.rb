@@ -34,7 +34,7 @@ class ReviewsController < ApplicationController
     @review.num_likes =0
     @review.num_dislikes =0
     @review.save!
-    debugger
+    
     redirect_to phone_path(@phone)
   end
 
