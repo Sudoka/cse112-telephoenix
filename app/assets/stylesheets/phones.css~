@@ -25,14 +25,14 @@ span#Sort {
   width  :25px
 }
 #phones div{
-  padding-top: 1px;
+  padding-top: 3px;
   padding-bottom: 0px;  
   padding-left: 10px;
   padding-right: 10px;
   height :auto;
   min-height :180px;
   margin : 3px;
-  width : 250px;
+  width : 280px;
   opacity:0;
   display:none;
   position:absolute;
@@ -56,6 +56,15 @@ span#Sort {
   font-size : 90%;
   color : gray;
   
+}
+.float span {
+  color : gray;
+  font-size : 90%;
+}
+.float a {
+  color : gray;
+  font-size : 90%;
+}
 }
 
 
