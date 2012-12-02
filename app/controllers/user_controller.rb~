@@ -93,7 +93,7 @@ class UserController < ApplicationController
 
     @user = User.find(params[:id])
     @reviews = Review.find_all_by_user_id(params[:id])
-    debugger
+    #debugger
   end
 
   def deleteUser
