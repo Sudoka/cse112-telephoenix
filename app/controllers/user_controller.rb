@@ -1,7 +1,8 @@
 class UserController < ApplicationController
-  
+  respond_to :html, :json
   before_filter :login_required, :only=>['welcome', 'change_password']
-  
+
+
   def register
     @user = User.new(params[:user])
     @user.user_type = "user"
@@ -66,6 +67,21 @@ class UserController < ApplicationController
     end
   
   end
+
+  def  edit
+      # debugger
+       @user = User.find_by_id params[:id]
+       
+        
+  end
+   
+  def  update
+    @user = User.find(params[:id])
+    @user.update_attributes(params[:user])
+    respond_with @user
+
+  end
+
   
   def destroy
     User.find(params[:id]).destroy

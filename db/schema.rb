@@ -65,6 +65,8 @@ ActiveRecord::Schema.define(:version => 20121128150506) do
     t.string   "name"
     t.string   "brand"
     t.string   "imgurl"
+    t.integer  "num_reviews"
+    t.integer  "overall_rating"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -132,6 +134,13 @@ ActiveRecord::Schema.define(:version => 20121128150506) do
     t.string   "uid"
     t.string   "oauth_token"
     t.datetime "oauth_expires_at"
+    t.string   "name"
+    t.string   "location"
+    t.string   "image"
+    t.string   "web_page"
+    t.string   "gender"
+    t.text     "interest"
+    t.boolean  "public_profile"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

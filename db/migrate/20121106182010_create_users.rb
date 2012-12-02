@@ -14,7 +14,19 @@ class CreateUsers < ActiveRecord::Migration
       t.string :uid
       t.string :oauth_token
       t.datetime :oauth_expires_at
-     
+      ##user info
+      t.string :name
+      t.string :location
+      t.string :image
+      t.string :web_page
+
+      t.string :gender
+      t.text   :interest
+      t.boolean :public_profile
+      
+
+
+
       t.timestamps
     end
   end

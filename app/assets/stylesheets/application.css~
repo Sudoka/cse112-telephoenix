@@ -59,18 +59,17 @@ div#currentuser a {
 color: white;
 }
 
-<<<<<<< HEAD
 
-=======
 label {
 float:left;
 clear:left;
 width:160px;
 }
+/*
 input, select {
 float:left;
 }
-
+*/
 div#navbar input {
 float:none;
 }
@@ -81,4 +80,4 @@ margin-left:20px;
 input[type=submit] {
 clear:both;
 }
->>>>>>> dbeaf172bc1608dcccd10de4ad39e319d47aba12
+

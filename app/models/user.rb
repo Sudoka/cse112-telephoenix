@@ -8,10 +8,11 @@ class User < ActiveRecord::Base
   attr_accessible :username, :email, :password, :password_confirmation, :ip_address
   attr_protected :id, :salt, :user_type
   attr_accessor :password, :password_confirmation
-  validates_length_of :username, :password, :within => 5..40      , :if => :no_omniauth?
-  validates_presence_of :username, :email, :password, :password_confirmation, :salt , :if => :no_omniauth?
-  validates_uniqueness_of :username, :email      , :if => :no_omniauth?
-  validates_confirmation_of :password  , :if => :no_omniauth?
+  validates_length_of :username, :password, :within => 5..40      , :on => :register
+  validates_presence_of :username, :password, :password_confirmation, :salt , :on => :register
+  validates_presence_of :email
+  validates_uniqueness_of :username, :email      , :on => :register
+  validates_confirmation_of :password  , :on => :register # :if => :no_omniauth?
   validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => "Invalid email"
 
   def self.authenticate(username, pass)
@@ -65,7 +66,7 @@ class User < ActiveRecord::Base
      user.email = auth.info.email
     # user.image = auth.info.image
      user.save!
-     user
+     return user
     
   end
   protected

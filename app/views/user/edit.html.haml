@@ -1,0 +1,32 @@
+= stylesheet_link_tag 'user'
+%h4=@user.username
+%div.profile
+  
+  %p
+    %b  Name:  
+    = best_in_place @user, :name, :nil=> "click to input Name"
+  %p
+    %b Email: 
+    = best_in_place @user, :email, :type => :input,:nil=> "click to input email address"
+  %p
+    %b Gender:
+    = best_in_place @user, :gender, type: :select, collection: [["Male", "Male"], ["Female", "Female"], ["", "Unspecified"]]
+
+  %p
+    %b Location:
+    = best_in_place @user, :location, :nil=>"click to input current location"
+  
+  %p
+    %b Web Page:
+    = best_in_place @user, :web_page, :nil=>"click to input personal web page"
+
+  %p
+    %b Insterests:
+    = best_in_place @user, :interest, type: :textarea, :nil=>"click to put your interests", :ok_button=>"Save"
+
+  %p
+    %b Is your profile open to public ?
+    =best_in_place @user, :public_profile, type: :checkbox, collection: %w[No Yes]
+
+
+

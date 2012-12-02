@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.0'
+gem 'rails', '3.1.3'   #pre 3.1.0
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
@@ -15,9 +15,9 @@ gem 'make_flaggable', :git => 'git://github.com/cavneb/make_flaggable.git'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails', "  ~> 3.1.0"
-  gem 'coffee-rails', "~> 3.1.0"
-  gem 'uglifier'
+  gem 'sass-rails',   "~> 3.1.5"  #pre 3.1.0
+  gem 'coffee-rails', "~> 3.1.1"  #pre 3.1.0
+  gem 'uglifier'  ,  '>=1.0.3'  #pre none
 end
 
 gem 'jquery-rails'
@@ -26,7 +26,8 @@ gem 'delayed_job_active_record'
 gem 'daemons'
 #  facebook
 gem 'omniauth-facebook'
-
+#  in-place edit
+gem 'best_in_place'
 # Use unicorn as the web server
 # gem 'unicorn'
 
