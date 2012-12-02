@@ -1,4 +1,21 @@
 %h2= @user.username
+- if !@user.public_profile&&session[:user]!=@user
+  %p="#{@user.username}'s information is not open to all"
+- else
+  %div
+    %p
+      = "Name:#{@user.name}"
+    %p
+      = "Email:#{@user.email}"
+    %p
+      = "Gender:#{@user.gender}"
+    %P
+      = "Location: #{@user.location}"
+    %p
+      = "Web Page: #{@user.web_page}"
+    %div
+      = "Insterests: #{@user.interest}"
+
 
 %table#reviews
   %col{:width => "200px"}

@@ -1,7 +1,7 @@
 = stylesheet_link_tag 'user'
-
-%div.profile
 %h4=@user.username
+%div.profile
+  
   %p
     %b  Name:  
     = best_in_place @user, :name, :nil=> "click to input Name"
@@ -20,7 +20,7 @@
     %b Web Page:
     = best_in_place @user, :web_page, :nil=>"click to input personal web page"
 
-  %p
+  %section
     %b Insterests:
     = best_in_place @user, :interest, type: :textarea, :nil=>"click to put your interests", :ok_button=>"Save"
 

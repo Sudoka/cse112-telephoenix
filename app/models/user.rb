@@ -64,7 +64,8 @@ class User < ActiveRecord::Base
      user.username = auth.info.name
      
      user.email = auth.info.email
-    # user.image = auth.info.image
+     user.image = auth.info.image
+     user.web_page = auth.info.urls.Facebook
      user.save!
      return user
     
