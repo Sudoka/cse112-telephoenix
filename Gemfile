@@ -28,6 +28,9 @@ gem 'daemons'
 gem 'omniauth-facebook'
 #  in-place edit
 gem 'best_in_place'
+#  image upload
+gem 'carrierwave'
+gem 'rmagick'
 # Use unicorn as the web server
 # gem 'unicorn'
 

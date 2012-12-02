@@ -1,4 +1,4 @@
-.best_in_place input, select{
+.profile input, select{
 float: none;
 }
 .profile{
@@ -14,5 +14,15 @@ width : 320px;
 }
 .web_page input{
 
-width: 280px;
+width: 350px;
+}
+/*
+.photo{
+height: 50;
+width: 50;
+}
+*/
+.image_input{
+width : 40px;
+
 }

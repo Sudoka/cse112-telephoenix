@@ -1,7 +1,12 @@
 = stylesheet_link_tag 'user'
 %h4=@user.username
 %div.profile
-  
+  = image_tag @user.image_url(:thumb).to_s, :class => 'photo'
+  = form_for @user, :html => {:multipart => true} do |f|
+    %p Change Profile Picture
+    = f.file_field :image
+    %br
+    = f.submit "Save"
   %p
     %b  Name:  
     = best_in_place @user, :name, :nil=> "click to input Name"
@@ -16,7 +21,7 @@
     %b Location:
     = best_in_place @user, :location, :nil=>"click to input current location"
   
-  %p
+  %p.web_page
     %b Web Page:
     = best_in_place @user, :web_page, :nil=>"click to input personal web page"
 

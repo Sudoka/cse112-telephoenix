@@ -1,8 +1,10 @@
+= stylesheet_link_tag 'user'
 %h2= @user.username
 - if !@user.public_profile&&session[:user]!=@user
   %p="#{@user.username}'s information is not open to all"
 - else
   %div
+    = image_tag @user.image_url(:thumb).to_s, :class => 'photo'
     %p
       = "Name:#{@user.name}"
     %p
@@ -13,7 +15,7 @@
       = "Location: #{@user.location}"
     %p
       = "Web Page: #{@user.web_page}"
-    %div
+    %div.interests
       = "Insterests: #{@user.interest}"
 
 

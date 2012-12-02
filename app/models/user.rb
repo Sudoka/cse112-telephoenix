@@ -4,8 +4,9 @@ class User < ActiveRecord::Base
   has_many :reviews
   #make_flagr
   #make_flaggable :flag_once => true
+  mount_uploader :image, ImageUploader
   make_flagger
-  attr_accessible :username, :email, :password, :password_confirmation, :ip_address
+  attr_accessible :username, :email, :password, :password_confirmation, :ip_address, :image, :remote_image_url
   attr_protected :id, :salt, :user_type
   attr_accessor :password, :password_confirmation
   validates_length_of :username, :password, :within => 5..40      , :on => :register
@@ -54,22 +55,27 @@ class User < ActiveRecord::Base
         user = find_by_email auth.info.email
         if user.nil?
            user = User.new
+           user.provider = auth.provider
+           user.uid = auth.uid      
+           user.oauth_token = auth.credentials.token
+           user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+     
+           user.username = auth.info.name
+     
+           user.email = auth.info.email
+           user.image = auth.info.image
+           user.web_page = auth.info.urls.Facebook
+           user.location = auth.info.loation
+           user.name = auth.info.name
+
+           user.save!
         end
      end
-     user.provider = auth.provider
-     user.uid = auth.uid      
-     user.oauth_token = auth.credentials.token
-     user.oauth_expires_at = Time.at(auth.credentials.expires_at)
-     
-     user.username = auth.info.name
-     
-     user.email = auth.info.email
-     user.image = auth.info.image
-     user.web_page = auth.info.urls.Facebook
-     user.save!
+ 
      return user
     
   end
+
   protected
 
   def self.encrypt(pass, salt)
