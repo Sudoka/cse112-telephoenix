@@ -16,12 +16,13 @@
     %b Location:
     = best_in_place @user, :location, :nil=>"click to input current location"
   
-  %p
+  %p.web_page
     %b Web Page:
     = best_in_place @user, :web_page, :nil=>"click to input personal web page"
 
-  %section
+  %section.interests
     %b Insterests:
+    %br
     = best_in_place @user, :interest, type: :textarea, :nil=>"click to put your interests"
   %p
     %b Is your profile open to public ?

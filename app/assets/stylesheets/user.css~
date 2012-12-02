@@ -5,3 +5,14 @@ float: none;
 padding-left:20px;
 padding-top: 0px;
 }
+.interests{
+word-wrap:  break-word;
+word-break: break-all;
+over-flow: hidden;
+width : 320px;
+
+}
+.web_page input{
+
+width: 280px;
+}

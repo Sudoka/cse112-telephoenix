@@ -12,10 +12,11 @@
       = image_tag 'tplogo.png'
       %div#currentuser
         - if session[:user]
-          = link_to "Hello #{session[:user].username} !", edit_user_path(current_user)
+          = link_to "Hello #{session[:user].username} !", edit_user_path(session[:user])
           = link_to "Logout", user_logout_path, :id => 'logout'
         - else
-          = link_to "Login with Facebook", '/auth/facebook', :id => 'login'
+          = link_to (image_tag "fb_login.png", :class=>"fb_png"), '/auth/facebook', :id => 'login'
+          = space(1)
           = link_to "Login", user_login_path
           |
           = link_to "Register", user_register_path

@@ -20,10 +20,10 @@
     %b Web Page:
     = best_in_place @user, :web_page, :nil=>"click to input personal web page"
 
-  %section
+  %section.interests
     %b Insterests:
-    = best_in_place @user, :interest, type: :textarea, :nil=>"click to put your interests", :ok_button=>"Save"
-
+    %br
+    = best_in_place @user, :interest, type: :textarea, :nil=>"click to put your interests"
   %p
     %b Is your profile open to public ?
     =best_in_place @user, :public_profile, type: :checkbox, collection: %w[No Yes]

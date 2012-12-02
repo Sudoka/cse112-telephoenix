@@ -65,11 +65,11 @@ float:left;
 clear:left;
 width:160px;
 }
-/*
+
 input, select {
 float:left;
 }
-*/
+
 div#navbar input {
 float:none;
 }
@@ -80,4 +80,8 @@ margin-left:20px;
 input[type=submit] {
 clear:both;
 }
+.fb_png {
+height: 35px;
+width: 65px;
 
+}
