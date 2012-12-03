@@ -12,6 +12,8 @@
       = image_tag 'tplogo.png'
       %div#currentuser
         - if session[:user]
+          - current_user= User.find_by_id(session[:user].id)        
+          = image_tag current_user.image_url(:small), :class => "small_image"
           = link_to "Hello #{session[:user].username} !", edit_user_path(session[:user])
           = link_to "Logout", user_logout_path, :id => 'logout'
         - else

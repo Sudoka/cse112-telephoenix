@@ -4,7 +4,7 @@
   %p="#{@user.username}'s information is not open to all"
 - else
   %div
-    = image_tag @user.image_url(:thumb).to_s, :class => 'photo'
+    = image_tag @user.image_url(:thumb).to_s
     %p
       = "Name:#{@user.name}"
     %p

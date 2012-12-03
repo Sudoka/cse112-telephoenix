@@ -31,8 +31,9 @@ class CommentsController < ApplicationController
     #send email to remind the user whose review is commented
     
     commenter = @user
-    @review.user.delay.comment_remind( commenter)
-
+    if commenter!=@review.user
+      @review.user.delay.comment_remind( commenter)
+    end
     redirect_to phone_review_path(@review.phone, @review)
   end
 

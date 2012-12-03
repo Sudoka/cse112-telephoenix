@@ -59,11 +59,11 @@ span#Sort {
 }
 .float span {
   color : gray;
-  font-size : 90%;
+  font-size : 85%;
 }
 .float a {
   color : gray;
-  font-size : 90%;
+  font-size : 85%;
 }
 }
 

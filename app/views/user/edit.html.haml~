@@ -1,7 +1,7 @@
 = stylesheet_link_tag 'user'
 %h4=@user.username
 %div.profile
-  = image_tag @user.image_url(:thumb).to_s, :class => 'photo'
+  = image_tag @user.image_url(:thumb), :class => 'photo'
   = form_for @user, :html => {:multipart => true} do |f|
     %p Change Profile Picture
     = f.file_field :image, :class=>"image_input"

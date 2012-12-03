@@ -6,12 +6,15 @@ class UserController < ApplicationController
   def register
     @user = User.new(params[:user])
     @user.user_type = "user"
-   
+ 
     if request.post?
+      @user.image = File.open ('app/assets/images/fb_avatar.jpg')
+      
       if @user.save
+       
         session[:user] = User.authenticate(@user.username, @user.password)
         flash[:message] = "Signup successful"
-      
+       # debugger
         #send email for sign up
         @user.delay.signup_confirmation
         if current_user.user_type == "Moderator"
@@ -69,16 +72,15 @@ class UserController < ApplicationController
   end
 
   def  edit
-      # debugger
-       @user = User.find_by_id params[:id]
        
-        debugger
+       @user = User.find_by_id params[:id]
+      
   end
    
   def  update
     @user = User.find(params[:id])
     @user.update_attributes(params[:user])
-    respond_with @user
+    respond_with @user, :location => edit_user_path
 
   end
 

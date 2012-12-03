@@ -76,9 +76,8 @@ class PhonesController < ApplicationController
     @num_if_checked = {}
     @num_if_checked = Phone.num_if_checked(phones, brands, @os, @ratings)
     ##             number of reviews
-    #debugger
-
-   
+    
+  
   end
 
   def words_checked (words, words_params)
