@@ -52,7 +52,6 @@ group :test do
   gem 'minitest', "~> 4.3.0"
 end
 group :development, :test do
-  gem 'ruby-debug19'
   gem 'rspec-expectations'
   gem 'cucumber-rails', :require => false
   gem 'cucumber-rails-training-wheels'
