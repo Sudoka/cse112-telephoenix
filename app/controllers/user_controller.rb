@@ -14,7 +14,7 @@ class UserController < ApplicationController
       @user.username_validator = true
       if @user.save
         
-        session[:user] = User.authenticate(@user.username, @user.password)
+        session[:user_id] = User.authenticate(@user.username, @user.password).id
         flash[:message] = "Signup successful"
        # debugger
         #send email for sign up
@@ -33,7 +33,7 @@ class UserController < ApplicationController
   def login
     if request.post?
      
-      if session[:user] = User.authenticate(params[:user][:username], params[:user][:password])
+      if session[:user_id] = User.authenticate(params[:user][:username], params[:user][:password]).id
         flash[:message] = "Login successful"
        
         if current_user.user_type == "Moderator"
@@ -48,7 +48,7 @@ class UserController < ApplicationController
   end
 
   def logout
-    session[:user] = nil
+    session[:user_id] = nil
     flash[:message] = "Logged out"
     redirect_to :action => "login"
   end
@@ -78,7 +78,8 @@ class UserController < ApplicationController
           @user.password_validator = true
           @user.username_validator = true
           if @user.save
-            # session[:user] = @user
+             #debugger
+            
              flash[:message] = "You password is changed successfully"
              redirect_to edit_user_path(@user)
           else
@@ -91,11 +92,12 @@ class UserController < ApplicationController
            redirect_to change_password_user_path(@user)
        end
     end  
-     # debugger
+     
   end
 
   def  edit       
-       @user = User.find_by_id params[:id]      
+       @user = User.find_by_id params[:id] 
+      
   end
    
   def  update

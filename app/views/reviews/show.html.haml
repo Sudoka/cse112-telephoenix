@@ -5,7 +5,8 @@
   %li= @review.user.username.to_s + ": "
   %li= @review.rating.to_s
   %li= @review.review_text
-  - if (session[:user] == @review.user || session[:user].user_type == ("admin" || "mod")) 
+  - current_user = User.find_by_id(session[:user_id])
+  - if (current_user == @review.user || current_user.user_type == ("admin" || "mod")) 
     = link_to "Edit", edit_phone_review_path(@review.phone, @review)
 
 
@@ -17,7 +18,7 @@
     %tbody
       - @comments.each do |comment|
         %tr
-          %td= session[:user].user_type.to_s
+          %td= User.find_by_id(session[:user_id]).user_type.to_s
           %td
             = link_to comment.user.username.to_s, user_path(comment.user) 
             = "Says:"

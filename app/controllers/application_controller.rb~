@@ -4,7 +4,8 @@ class ApplicationController < ActionController::Base
 
   protected
   def moder?
-    if session[:user].user_type == "Moderator"    
+    user = User.find_by_id(session[:user_id])
+    if user.user_type == "Moderator"    
       true
     else
       false
@@ -15,7 +16,7 @@ class ApplicationController < ActionController::Base
 
   #Verifies that the user is currently logged in.
   def login_required
-    if session[:user]
+    if session[:user_id]
       return true
     end
     flash[:warning] = "Please login to continue!"
@@ -26,34 +27,36 @@ class ApplicationController < ActionController::Base
 
   #Verifies that the current user is at least a moderator.
   def moderator_required
-    if session[:user].user_type == "mod" || session[:user].user_type == "admin"
+    user = User.find_by_id(session[:user_id])
+    if user.user_type == "mod" || user.user_type == "admin"
       return true
     end
     flash[:warning] = "You have attempted to access a page you are not supposed to. You have been logged out for security."
-    session[:user] = nil
+    session[:user_id] = nil
     redirect_to :controller => "user", :action => "login"
     return false
   end
 
   #Verifies that the current user is an admin.
   def admin_required
-    if session[:user].user_type == "admin"
+    user = User.find_by_id(session[:user_id])
+    if user.user_type == "admin"
       return true
     end
     flash[:warning] = "You have attempted to access a page you are not supposed to. You have been logged out for security."
-    session[:user] = nil
+    session[:user_id] = nil
     redirect_to :controller => "user", :action => "login"
     return false
   end
 
   #Returns the current users User object.
   def current_user
-    session[:user]
+    User.find_by_id(session[:user_id])
   end
 
   #Redirects to the stored link that was last attempted.
   def redirect_to_stored
-      debugger
+      #debugger
     if return_to = session[:return_to]
       session[:return_to] = nil
       redirect_to return_to
@@ -63,7 +66,8 @@ class ApplicationController < ActionController::Base
   end
 
   def can_edit(user)
-    if session[:user] == user || session[:user].user_type == ("admin" || "mod")
+    current = User.find_by_id(session[:user_id])
+    if current == user || current.user_type == ("admin" || "mod")
       return true
     else
       return false
