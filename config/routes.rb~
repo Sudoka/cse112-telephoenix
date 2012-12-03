@@ -25,11 +25,19 @@ Telephoenix::Application.routes.draw do
 
   get "user/edit"
 
-  get "user/forget_password" 
+  get "user/forget_password"   
   post "user/forget_password" 
+  
+ # get "user/:id/change_password" => 'user'
+#  match 'user/:id/change_password' => 'user#change_password', :via => [:get, :post]
   # The priority is based upon order of creation:
   # first created -> highest priority.
-
+  resources :user do
+    member do
+      get 'change_password'
+      post 'change_password'
+    end
+  end
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
@@ -40,7 +48,7 @@ Telephoenix::Application.routes.draw do
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
-
+  
   # Sample resource route with options:
   #   resources :products do
   #     member do

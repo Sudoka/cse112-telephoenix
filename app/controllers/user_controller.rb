@@ -5,13 +5,15 @@ class UserController < ApplicationController
 
   def register
     @user = User.new(params[:user])
+   # debugger
     @user.user_type = "user"
- 
+    
     if request.post?
       @user.image = File.open ('app/assets/images/fb_avatar.jpg')
-      
+      @user.password_validator = true
+      @user.username_validator = true
       if @user.save
-       
+        
         session[:user] = User.authenticate(@user.username, @user.password)
         flash[:message] = "Signup successful"
        # debugger
@@ -55,30 +57,51 @@ class UserController < ApplicationController
     if request.post?
        user = User.find_by_email params[:user][:email]
    
-       if  user.nil? == false
-           
+       if  user.nil? == false          
            user.change_new_password
            flash[:message] = "You new password is being sended"
            redirect_to phones_path
        else
            flash[:message] = "Invalid email"
            redirect_to  user_forget_password_path
-       end
-       
-
-      
-    end
-  
+       end             
+    end  
   end
 
-  def  edit
-       
-       @user = User.find_by_id params[:id]
-      
+  def change_password
+    @user = User.find_by_id params[:id]  
+    if request.post?
+       if User.authenticate(@user.username, params[:user][:current_password])
+         
+          @user.password = params[:user][:password]
+          @user.password_confirmation = params[:user][:password_confirmation] 
+          @user.password_validator = true
+          @user.username_validator = true
+          if @user.save
+            # session[:user] = @user
+             flash[:message] = "You password is changed successfully"
+             redirect_to edit_user_path(@user)
+          else
+           flash[:message] = "You didn't change password successfully, please do it again"
+           redirect_to change_password_user_path(@user)
+          end
+
+       else 
+           flash[:message] = "You didn't change password successfully, please do it again"
+           redirect_to change_password_user_path(@user)
+       end
+    end  
+     # debugger
+  end
+
+  def  edit       
+       @user = User.find_by_id params[:id]      
   end
    
   def  update
     @user = User.find(params[:id])
+    @user.password_validator = false
+    @user.username_validator = true
     @user.update_attributes(params[:user])
     respond_with @user, :location => edit_user_path
 

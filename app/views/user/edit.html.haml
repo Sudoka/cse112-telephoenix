@@ -32,6 +32,8 @@
   %p
     %b Is your profile open to public ?
     =best_in_place @user, :public_profile, type: :checkbox, collection: %w[No Yes]
+  %p= link_to "Change your password", change_password_user_path(@user)
+    
 
 
 

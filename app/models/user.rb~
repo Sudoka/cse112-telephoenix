@@ -8,12 +8,18 @@ class User < ActiveRecord::Base
   make_flagger
   attr_accessible :username, :email, :password, :password_confirmation, :ip_address, :image
   attr_protected :id, :salt, :user_type
-  attr_accessor :password, :password_confirmation
-  validates_length_of :username, :password, :within => 5..40      , :on => :register
-  validates_presence_of :username, :password, :password_confirmation, :salt , :on => :register
+  attr_accessor :password, :password_confirmation, :current_password, :password_validator, :username_validator #determine whether validate password/username
+
+  validates_length_of :username, :within => 5..40, :if => :should_validate_username?   
+  validates_presence_of :username, :if => :should_validate_username?    
+  validates_uniqueness_of :username, :if => :should_validate_username?    
+  
+  validates_length_of :password, :within => 5..40,  :if => :should_validate_password?   
+  validates_presence_of :password, :password_confirmation, :salt, :if => :should_validate_password?   
+  validates_confirmation_of :password, :if => :should_validate_password?   
+
   validates_presence_of :email
-  validates_uniqueness_of :username, :email      , :on => :register
-  validates_confirmation_of :password  , :on => :register # :if => :no_omniauth?
+  validates_uniqueness_of :email      
   validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => "Invalid email"
 
   def self.authenticate(username, pass)
@@ -40,6 +46,25 @@ class User < ActiveRecord::Base
     self.delay.send_password(self, new_pass)
   end
   
+  def should_validate_password?   
+      password_validator==true
+  end
+
+  def should_validate_username?
+      username_validator==true
+  end
+
+  def change_password (current_password, new_password, new_password_confirmation)
+     if user= User.authenticate(self.username, current_password)
+        user.password = new_password
+        user.password_confirmation = new_password_confirmation
+        debugger
+        return user.save
+     else
+        return false
+     end
+
+  end
   def send_password (user, password)
       UserMailer.send_password(user, password).deliver
   end
@@ -64,6 +89,10 @@ class User < ActiveRecord::Base
            user.web_page = auth.info.urls.Facebook
            user.location = auth.info.loation
            user.name = auth.info.name
+           user.password_validator = false
+           user.username_validator = false
+           user.image = File.open ('app/assets/images/fb_avatar.jpg')
+        
            user.save!
         end
      end
