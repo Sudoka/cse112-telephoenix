@@ -7,7 +7,9 @@ gem 'rails', '3.1.0'   #pre 3.1.0
 
 gem 'sqlite3'
 
-gem 'ruby-debug19', :require => 'ruby-debug'
+group :development do
+  gem 'ruby-debug19', :require => 'ruby-debug'
+end
 
 gem 'make_flaggable', :git => 'git://github.com/cavneb/make_flaggable.git'
 
@@ -47,10 +49,8 @@ gem 'xpath'
 group :test do
   # Pretty printed test output
   gem 'turn', :require => false
+  gem 'minitest', "~> 4.3.0"
 end
-
-gem 'minitest', "~> 4.3.0"
-
 group :development, :test do
   gem 'ruby-debug19'
   gem 'rspec-expectations'
