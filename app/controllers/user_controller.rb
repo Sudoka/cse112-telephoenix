@@ -6,8 +6,8 @@ class UserController < ApplicationController
   def register
     @user = User.new(params[:user])
    # debugger
-    #@user.user_type = "user"
-    User.setUser_type(@user)
+    @user.user_type = "User"
+    #User.setUser_type(@user)
 
     if request.post?
       @user.image = File.open ('app/assets/images/fb_avatar.jpg')
@@ -130,7 +130,7 @@ class UserController < ApplicationController
   end
 
   def demoteModerator
-    User.user_type = "not mod"
+    User.user_type = "User"
     User.save
   end
 
@@ -140,7 +140,8 @@ class UserController < ApplicationController
   end
 
   def indexAdmin
-    @users = User.find_by_user_type("Moderator")
+    @moderators = User.where(:user_type => "Moderator").all
+    @users = User.where(:user_type => "User").all
   end
 
 

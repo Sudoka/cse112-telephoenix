@@ -3,7 +3,7 @@ class Review < ActiveRecord::Base
   belongs_to :user
   has_many :review_like
   has_many :comments
-  #make_flaggable :like
+  make_flaggable :report
   attr_accessible :id, :user, :phone, :review_text, :rating, :user_id, :phone_id, :like
 =begin
  def num_likes 
