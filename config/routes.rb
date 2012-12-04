@@ -26,7 +26,10 @@ Telephoenix::Application.routes.draw do
   get "user/edit"
 
   get "user/forget_password"   
-  post "user/forget_password" 
+  post "user/forget_password"
+
+  get "user/indexMod"
+  get "user/indexAdmin"
   
  # get "user/:id/change_password" => 'user'
 #  match 'user/:id/change_password' => 'user#change_password', :via => [:get, :post]
@@ -101,10 +104,8 @@ end
 match "/review_likes/new/:review_id/:value"=> "review_likes#new"
 resources :review_likes
 
-resources :moderators
-resources :admins
-
-
 resources :user
+
+
 root to: redirect('/phones')
 end

@@ -6,8 +6,8 @@
   %li= @review.rating.to_s
   %li= @review.review_text
   - current_user = User.find_by_id(session[:user_id])
-  - if (current_user == @review.user || current_user.user_type == ("admin" || "mod")) 
-    = link_to "Edit", edit_phone_review_path(@review.phone, @review)
+  - if (current_user == @review.user || current_user.user_type == "Moderator" || user_type == "Admin") 
+    = link_to "Edit Review", edit_phone_review_path(@review.phone, @review)
 
 
 %table#comments
@@ -28,7 +28,6 @@
         %tr  
           %td= "\t"
           %td= comment.comment_text
-        
         - if moder?
           %td= "\t"
           %td= link_to "Edit Post"
