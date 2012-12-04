@@ -6,24 +6,21 @@ class UserController < ApplicationController
   def register
     @user = User.new(params[:user])
    # debugger
-    @user.user_type = "user"
-    
+    @user.user_type = "User"
+    #User.setUser_type(@user)
+
     if request.post?
       @user.image = File.open ('app/assets/images/fb_avatar.jpg')
       @user.password_validator = true
       @user.username_validator = true
       if @user.save
-        
         session[:user_id] = User.authenticate(@user.username, @user.password).id
-        flash[:message] = "Signup successful"
+        flash[:message] = "Signup successful #{@user.user_type}"
        # debugger
         #send email for sign up
         @user.delay.signup_confirmation
-        if current_user.user_type == "Moderator"
-          redirect_to moderators_path
-        else
+        
         redirect_to :controller => "phones" #TODO redirect to welcome page
-        end
       else
         flash[:warning] = "Signup unsuccessful"
       end
@@ -32,12 +29,18 @@ class UserController < ApplicationController
 
   def login
     if request.post?
-     
       if session[:user_id] = User.authenticate(params[:user][:username], params[:user][:password]).id
+        usr = User.find_by_id(session[:user_id])
+        username = usr.username
+        usertype = usr.user_type
         flash[:message] = "Login successful"
        
-        if current_user.user_type == "Moderator"
-          redirect_to moderators_path
+        if usertype == "Moderator"
+          flash[:message] = "Hello Moderator #{username}"
+          redirect_to user_indexMod_path
+        elsif usertype == "Admin"
+          flash[:message] = "Welcome Master #{username}"
+          redirect_to user_indexAdmin_path
         else
           redirect_to_stored
         end
@@ -97,7 +100,6 @@ class UserController < ApplicationController
 
   def  edit       
        @user = User.find_by_id params[:id] 
-      
   end
    
   def  update
@@ -128,8 +130,19 @@ class UserController < ApplicationController
   end
 
   def demoteModerator
-    User.user_type = "not mod"
+    User.user_type = "User"
     User.save
   end
+
+  def indexMod
+    #get all flag message
+
+  end
+
+  def indexAdmin
+    @moderators = User.where(:user_type => "Moderator").all
+    @users = User.where(:user_type => "User").all
+  end
+
 
 end
