@@ -2,7 +2,6 @@ require 'digest/sha1'
 
 class User < ActiveRecord::Base
   has_many :reviews
-  #make_flagr
   #make_flaggable :flag_once => true
   mount_uploader :image, ImageUploader
   make_flagger
