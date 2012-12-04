@@ -29,7 +29,8 @@ class UserController < ApplicationController
 
   def login
     if request.post?
-      if session[:user_id] = User.authenticate(params[:user][:username], params[:user][:password]).id
+      if User.authenticate(params[:user][:username], params[:user][:password])
+        session[:user_id]= User.authenticate(params[:user][:username], params[:user][:password]).id
         usr = User.find_by_id(session[:user_id])
         username = usr.username
         usertype = usr.user_type

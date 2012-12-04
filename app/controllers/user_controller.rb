@@ -18,7 +18,7 @@ class UserController < ApplicationController
         flash[:message] = "Signup successful #{@user.user_type}"
        # debugger
         #send email for sign up
-        @user.delay.signup_confirmation
+        @user.signup_confirmation
         
         redirect_to :controller => "phones" #TODO redirect to welcome page
       else
