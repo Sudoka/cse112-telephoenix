@@ -17,7 +17,7 @@
               %dl
                 %dt
                   %dd
-                    = link_to "Demote"
+                    = link_to "Demote", edit_user_path(moderator, :demote), confirm: 'Are you sure?'
                     = " | "
                     = link_to "Delete User", user_path(moderator), method: :delete, confirm: 'Are you sure?'
                   %p
@@ -31,7 +31,7 @@
               %dl
                 %dt
                   %dd
-                    = link_to "Promote"
+                    = link_to "Promote", edit_user_path(usr, :promote), confirm: 'Are you sure?'
                     = " | "
                     = link_to "Delete User", user_path(usr), method: :delete, confirm: 'Are you sure?'
                   %p

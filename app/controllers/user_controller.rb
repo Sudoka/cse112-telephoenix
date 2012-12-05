@@ -6,8 +6,8 @@ class UserController < ApplicationController
   def register
     @user = User.new(params[:user])
    # debugger
-    #@user.user_type = "User"
-    User.setUser_type(@user)
+    @user.user_type = "User"
+    #User.setUser_type(@user)
 
     if request.post?
       @user.image = File.open ('app/assets/images/fb_avatar.jpg')
@@ -101,6 +101,18 @@ class UserController < ApplicationController
 
   def  edit       
        @user = User.find_by_id params[:id] 
+       if (params[:format] == "promote")
+        @user.user_type = "Moderator"
+        @user.save
+        flash[:message] = "#{@user.username} has been promoted"
+      else if ((params[:format] == "demote"))
+        @user.user_type = "User"
+        @user.save
+        flash[:message] = "#{@user.username} has been demoted"
+      end
+      end
+
+      redirect_to user_indexAdmin_path
   end
    
   def  update
