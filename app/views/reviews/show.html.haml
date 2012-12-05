@@ -6,7 +6,7 @@
   %li= @review.rating.to_s
   %li= @review.review_text
   - current_user = User.find_by_id(session[:user_id])
-  - if (current_user != nil && (current_user == @review.user || current_user.user_type == "Moderator" || current_user.user_type == "Admin")) 
+  - if (current_user != nil && (current_user == @review.user || moder? || admin?)) 
     = link_to "Edit Review", edit_phone_review_path(@review.phone, @review)
 
 

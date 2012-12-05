@@ -36,10 +36,10 @@ class UserController < ApplicationController
         usertype = usr.user_type
         flash[:message] = "Login successful"
        
-        if usertype == "Moderator"
+        if moder?
           flash[:message] = "Hello Moderator #{username}"
           redirect_to user_indexMod_path
-        elsif usertype == "Admin"
+        elsif admin?
           flash[:message] = "Welcome Master #{username}"
           redirect_to user_indexAdmin_path
         else
@@ -142,7 +142,6 @@ class UserController < ApplicationController
 
 
   def show
-
     @user = User.find(params[:id])
     @reviews = Review.find_all_by_user_id(params[:id])
     #debugger
