@@ -27,7 +27,7 @@
           %td= comment.comment_text
           %td= button_to "Report"
 
-        - if (current_user != nil && moder?)
+        - if (current_user != nil && (moder? || admin?))
           %td= "\t"
           %td= link_to "Edit Post"
           %td= button_to "Delete Comment", phone_review_comment_path(@review, comment), method: :delete, confirm: 'Are you sure?'
