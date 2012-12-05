@@ -10,6 +10,8 @@ Telephoenix::Application.routes.draw do
 
   get "static_pages/contact"
 
+  get "static_pages/home"
+
   resources :likes
 
 
