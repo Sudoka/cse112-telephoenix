@@ -39,7 +39,7 @@ class UserController < ApplicationController
         if moder?
           flash[:message] = "Hello Moderator #{username}"
           redirect_to user_indexMod_path
-        elsif usertype == "Admin"
+        elsif admin?
           flash[:message] = "Welcome Master #{username}"
           redirect_to user_indexAdmin_path
         else

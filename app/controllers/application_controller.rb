@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   protected
   def moder?
     user = User.find_by_id(session[:user_id])
-    if (user.user_type == "Moderator" || user.user_type == "Admin")  
+    if user.user_type == "Moderator"  
       true
     else
       false
