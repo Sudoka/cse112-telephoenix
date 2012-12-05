@@ -28,7 +28,7 @@
             = "User: "
             = link_to review.user.username.to_s, user_path(review.user)
         %tr
-          %td= link_to "Report"
+          %td= button_to "Delete Review", phone_review_path(review), method: :delete, confirm: 'Are you sure?'
           %td= review.review_text.to_s
           /%td= #{}"Likes: " + "#{review.num_likes}" 
           %td= button_to "#{review.num_likes} Likes", {:review_id =>review.id,  :value => "like",:method => "get", :action => "create", :controller => "review_likes" }

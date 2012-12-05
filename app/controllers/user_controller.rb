@@ -114,8 +114,18 @@ class UserController < ApplicationController
 
   
   def destroy
+    comments = Comment.find_all_by_user_id(params[:id])
+    comments.each { |comment|
+      comment.destroy}
+    reviews = Review.find_all_by_user_id(params[:id])
+    reviews.each { |review| 
+      rcomments = Comment.find(:all, :from => "Comments", :conditions => ['review_id = ?',review.id])
+      rcomments.each { |comment|
+      comment.destroy}
+      review.destroy}
     User.find(params[:id]).destroy
-    redirect_to moderators_path, :notice => "The post has been deleted"
+    flash[:message] = "The user has been deleted."
+    redirect_to user_indexAdmin_path
   end
 
 
@@ -123,10 +133,6 @@ class UserController < ApplicationController
     @user = User.find(params[:id])
     @reviews = Review.find_all_by_user_id(params[:id])
     #debugger
-  end
-
-  def deleteUser
-    User.find(params[:id]).destroy
   end
 
   def demoteModerator

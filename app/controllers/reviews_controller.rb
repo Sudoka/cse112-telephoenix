@@ -56,8 +56,14 @@ class ReviewsController < ApplicationController
 
 
   def destroy
-    Comment.find(params[:id]).destroy
-    redirect_to moderators_path
+    review = Review.find(params[:phone_id])
+    phone = review.phone
+    comments = Comment.find(:all, :from => "Comments", :conditions => ['review_id = ?',review.id])
+    comments.each { |comment|
+    comment.destroy}
+    review.destroy
+    flash[:message] = "The review has been deleted."
+    redirect_to phone_path(phone)
   end
 
 end

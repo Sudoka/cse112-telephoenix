@@ -7,9 +7,9 @@ class Phone < ActiveRecord::Base
 
 
   def self.search (search)
-  	find(:all, :select => "Phones.id, name, brand", :from => "Tags, Phones", :conditions => ['value LIKE ? AND phone_id = Phones.id', "%" + search + "%"]) +
-  	find(:all, :conditions => ['name LIKE ?', "%" + search + "%"]) +
-    find(:all, :conditions => ['brand LIKE ?', search])
+  	find(:all, :select => "Phones.id, name, brand", :from => "Tags, Phones", :conditions => ['lower(value) LIKE lower(?) AND phone_id = Phones.id', "%" + search + "%"]) +
+    find(:all, :conditions => ['lower(name) LIKE lower(?)', "%" + search + "%"]) +
+    find(:all, :conditions => ['lower(brand) LIKE lower(?)', search])
   end
   
   def self.phones_choosen (args={})
