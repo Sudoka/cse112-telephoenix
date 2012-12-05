@@ -1,0 +1,26 @@
+%h1 Flagged Comments
+
+%table#flagged{:style => "border: 50px; width: 70%"}
+  -#%col{:width => "200px"}/
+  %tbody
+    %tr{:height => "50px"}
+      %td= link_to "USER BEING FLAGG??:" #, :confirm => "Are you sure?", :method => :delete
+    %tr
+      %td=" "
+      %td="\t "
+    %tr
+      %td{:align => "center"}
+        = link_to "Comments"
+      %td{:align => "left"}
+        = link_to "Read full Review"
+    %tr
+      %td{:align => "center"}
+        = link_to "Edit"
+        = link_to "Comment"
+      %td{:align => "center"}
+        = link_to "Unflag", :confirm => "Are you sure you want to delete this post" #,:method => :delete
+    %tr
+      %td
+      %td{:align => "left"}
+        = "Flagged by "
+        = link_to "User"

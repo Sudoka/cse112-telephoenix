@@ -1,0 +1,42 @@
+%h2 What would you like to do?
+
+%table{:style => "border: 50px; width: 65%; height: 30%"}
+  %tr
+    %th 
+      %b Supervise Moderators
+    %th
+      %b Assign Moderators
+  %tbody
+    %tr
+      %td
+        %dl
+          %dt
+          - @moderators.each do |moderator|
+            %dd{:height => '50px'}
+              = moderator.username 
+              %dl
+                %dt
+                  %dd
+                    = link_to "Demote"
+                    = " | "
+                    = link_to "Delete User"
+                  %p
+
+      %td
+        %dl
+          %dt
+          - @users.each do |usr|
+            %dd
+              = usr.username 
+              %dl
+                %dt
+                  %dd
+                    = link_to "Promote"
+                    = " | "
+                    = link_to "Delete User"
+                  %p
+    %tr
+      %td= link_to "Add Scripts"
+
+
+
