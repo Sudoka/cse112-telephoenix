@@ -1,11 +1,21 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  helper_method :moder?
+  helper_method :moder?, :admin?
 
   protected
   def moder?
     user = User.find_by_id(session[:user_id])
     if user.user_type == "Moderator"    
+      true
+    else
+      false
+    end
+  end
+
+  protected
+  def admin?
+    user = User.find_by_id(session[:user_id])
+    if user.user_type == "Admin"
       true
     else
       false
@@ -21,31 +31,31 @@ class ApplicationController < ActionController::Base
     end
     flash[:warning] = "Please login to continue!"
     session[:return_to] = request.fullpath
-    redirect_to :controller => "user", :action => "login"
+    redirect_to :controller => "User", :action => "login"
     return false
   end
 
   #Verifies that the current user is at least a moderator.
   def moderator_required
     user = User.find_by_id(session[:user_id])
-    if user.user_type == "mod" || user.user_type == "admin"
+    if moder? || admin?
       return true
     end
     flash[:warning] = "You have attempted to access a page you are not supposed to. You have been logged out for security."
     session[:user_id] = nil
-    redirect_to :controller => "user", :action => "login"
+    redirect_to :controller => "User", :action => "login"
     return false
   end
 
   #Verifies that the current user is an admin.
   def admin_required
     user = User.find_by_id(session[:user_id])
-    if user.user_type == "admin"
+    if user.user_type == "Admin"
       return true
     end
     flash[:warning] = "You have attempted to access a page you are not supposed to. You have been logged out for security."
     session[:user_id] = nil
-    redirect_to :controller => "user", :action => "login"
+    redirect_to :controller => "User", :action => "login"
     return false
   end
 
@@ -61,13 +71,13 @@ class ApplicationController < ActionController::Base
       session[:return_to] = nil
       redirect_to return_to
     else
-      redirect_to :controller => "phones"#:controller=>"user", :action=>'welcome'
+      redirect_to :controller => "phones"#:controller=>"User", :action=>'welcome'
     end
   end
 
   def can_edit(user)
     current = User.find_by_id(session[:user_id])
-    if current == user || current.user_type == ("admin" || "mod")
+    if current == user || moder? || admin?
       return true
     else
       return false
