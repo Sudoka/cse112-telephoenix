@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   protected
   def moder?
     user = User.find_by_id(session[:user_id])
-    if user.user_type == "Moderator"    
+    if (user.user_type == "Moderator" || user.user_type == "Admin")  
       true
     else
       false
@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
   #Verifies that the current user is at least a moderator.
   def moderator_required
     user = User.find_by_id(session[:user_id])
-    if user.user_type == "mod" || user.user_type == "admin"
+    if user.user_type == "Moderator" || user.user_type == "Admin"
       return true
     end
     flash[:warning] = "You have attempted to access a page you are not supposed to. You have been logged out for security."
@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
   #Verifies that the current user is an admin.
   def admin_required
     user = User.find_by_id(session[:user_id])
-    if user.user_type == "admin"
+    if user.user_type == "Admin"
       return true
     end
     flash[:warning] = "You have attempted to access a page you are not supposed to. You have been logged out for security."
@@ -67,7 +67,7 @@ class ApplicationController < ActionController::Base
 
   def can_edit(user)
     current = User.find_by_id(session[:user_id])
-    if current == user || current.user_type == ("admin" || "mod")
+    if (current == user || current.user_type == "Admin" || current.user_type == "Moderator")
       return true
     else
       return false

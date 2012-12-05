@@ -19,7 +19,7 @@
                   %dd
                     = link_to "Demote"
                     = " | "
-                    = link_to "Delete User"
+                    = link_to "Delete User", user_path(moderator), method: :delete, confirm: 'Are you sure?'
                   %p
 
       %td
@@ -33,7 +33,7 @@
                   %dd
                     = link_to "Promote"
                     = " | "
-                    = link_to "Delete User"
+                    = link_to "Delete User", user_path(usr), method: :delete, confirm: 'Are you sure?'
                   %p
     %tr
       %td= link_to "Add Scripts"

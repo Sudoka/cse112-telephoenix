@@ -38,8 +38,10 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    Comment.find(params[:id]).destroy
-    redirect_to moderators_path
+    @comment = Comment.find(:all, :from => "Comments", :conditions => ['id = ? AND review_id = ?', params[:id], params[:review_id]])
+    @comment[0].destroy
+    flash[:message] = "Comment deleted."
+    redirect_to phone_review_path(@phone, @review)
   end
 
 

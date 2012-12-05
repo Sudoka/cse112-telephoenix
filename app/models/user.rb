@@ -120,11 +120,14 @@ class User < ActiveRecord::Base
   end
 
   def self.setUser_type(usr)
-  #  if rand(2) == 1
-  #    usr.user_type = Moderator.to_s
-  #  else
-    usr.user_type = "Moderator"
-  #  end
+    if rand(2) == 1
+      usr.user_type = "Moderator"
+    else if rand(2) == 0
+      usr.user_type = "User"
+    else
+      usr.user_type = "Admin"
+    end
+   end
   end
 
 
