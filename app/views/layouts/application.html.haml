@@ -15,6 +15,10 @@
           - current_user = User.find_by_id(session[:user_id])        
           = image_tag current_user.image_url(:small), :class => "small_image"
           = link_to "Hello #{current_user.username} !", edit_user_path(current_user)
+          - if admin?
+            = link_to "Control Panel", user_indexAdmin_path
+          - elsif moder?
+            = link_to "Control Panel", user_indexMod_path
           = link_to "Logout", user_logout_path, :id => 'logout'
         - else
           = link_to (image_tag "fb_login.png", :class=>"fb_png"), '/auth/facebook', :id => 'login'
