@@ -11,6 +11,9 @@
       %td
         %dl
           %dt
+          - if @moderators.empty?
+            %dd
+            = "No moderators to administrate"
           - @moderators.each do |moderator|
             %dd{:height => '50px'}
               = moderator.username 
@@ -21,10 +24,12 @@
                     = " | "
                     = link_to "Delete User", user_path(moderator), method: :delete, confirm: 'Are you sure?'
                   %p
-
       %td
         %dl
           %dt
+          - if @users.empty?
+            %dd{:align => "right"}
+            = "No users to administrate"
           - @users.each do |usr|
             %dd
               = usr.username 
@@ -36,7 +41,7 @@
                     = link_to "Delete User", user_path(usr), method: :delete, confirm: 'Are you sure?'
                   %p
     %tr
-      %td= link_to "Add Scripts"
+      %td= link_to "Back to Phones", phones_path 
 
 
 

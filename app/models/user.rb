@@ -69,10 +69,11 @@ class User < ActiveRecord::Base
      end
 
   end
+  
   def send_password (user, password)
       UserMailer.send_password(user, password).deliver
   end
-  ##
+
   def no_omniauth?
       self.provider.nil?
   end
@@ -120,14 +121,11 @@ class User < ActiveRecord::Base
   end
 
   def self.setUser_type(usr)
-    if rand(2) == 1
-      usr.user_type = "Moderator"
-    else if rand(2) == 0
-      usr.user_type = "User"
-    else
-      usr.user_type = "Admin"
-    end
-   end
+  #  if rand(2) == 1
+  #    usr.user_type = Moderator.to_s
+  #  else
+    usr.user_type = "Moderator"
+  #  end
   end
 
 

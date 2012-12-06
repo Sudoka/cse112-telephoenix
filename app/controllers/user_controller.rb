@@ -104,15 +104,18 @@ class UserController < ApplicationController
        if (params[:format] == "promote")
         @user.user_type = "Moderator"
         @user.save
-        flash[:message] = "#{@user.username} has been promoted"
-      else if ((params[:format] == "demote"))
+        flash[:message] = "#{@user.username} has been promoted to a Moderator"
+      elsif ((params[:format] == "demote"))
         @user.user_type = "User"
         @user.save
-        flash[:message] = "#{@user.username} has been demoted"
-      end
+        flash[:message] = "#{@user.username} has been demoted to a User"
       end
 
-      redirect_to user_indexAdmin_path
+      if admin?
+        redirect_to user_indexAdmin_path
+      elsif
+        redirect_to user_indexMod_path
+      end
   end
    
   def  update
@@ -153,7 +156,9 @@ class UserController < ApplicationController
   end
 
   def indexMod
-    #get all flag message
+    @users = User.where(:user_type => "User").all
+    @reviews = nil
+    @phones = Phone.all
 
   end
 

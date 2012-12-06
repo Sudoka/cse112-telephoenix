@@ -1,26 +1,45 @@
-%h1 Flagged Comments
+%h2 Administrating Moderators
 
-%table#flagged{:style => "border: 50px; width: 70%"}
-  -#%col{:width => "200px"}/
+%table{:style => "width: 800px"}
+  %tr
+    %th{:align => "left"} 
+      %b List of all Users:
+    %th{:align => "left"}
+      %b List of all Reviews:
   %tbody
-    %tr{:height => "50px"}
-      %td= link_to "USER BEING FLAGG??:" #, :confirm => "Are you sure?", :method => :delete
     %tr
-      %td=" "
-      %td="\t "
+      %td{:valign => "top"}
+        %dl
+          %dt
+          - if @users.empty?
+            %dd
+            = "No users to administrate"
+          - elsif
+            - @users.each do |usr|
+              %dd
+                = usr.username 
+                %dl
+                  %dt
+                    %dd
+                      = link_to "Promote", edit_user_path(usr, :promote), confirm: 'Are you sure?'
+                      = " | "
+                      = link_to "Delete User", user_path(usr), method: :delete, confirm: 'Are you sure?'
+                    %p 
+      %td{:valign => "top"}
+        %dl
+        - @phones.each do |phone|
+          - if !Review.find_all_by_phone_id(phone.id).empty?
+            %dt
+              %b= phone.name
+              %dd{:valign => "top"}
+              - @reviews = Review.find_all_by_phone_id(phone.id)
+              - @reviews.each do |review|
+                = review.review_text
+                %dd{:margin => "100" }
+                = link_to "View full review", phone_review_path(review.phone, review)
+                = " | "
+                ="by user "
+                = link_to "#{review.user.username}", user_path(review.user)
+                %p
     %tr
-      %td{:align => "center"}
-        = link_to "Comments"
-      %td{:align => "left"}
-        = link_to "Read full Review"
-    %tr
-      %td{:align => "center"}
-        = link_to "Edit"
-        = link_to "Comment"
-      %td{:align => "center"}
-        = link_to "Unflag", :confirm => "Are you sure you want to delete this post" #,:method => :delete
-    %tr
-      %td
-      %td{:align => "left"}
-        = "Flagged by "
-        = link_to "User"
+      %td= link_to "Back to Phones", phones_path

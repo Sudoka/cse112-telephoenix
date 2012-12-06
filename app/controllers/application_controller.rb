@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
     end
     flash[:warning] = "Please login to continue!"
     session[:return_to] = request.fullpath
-    redirect_to :controller => "User", :action => "login"
+    redirect_to :controller => "user", :action => "login"
     return false
   end
 
@@ -43,7 +43,7 @@ class ApplicationController < ActionController::Base
     end
     flash[:warning] = "You have attempted to access a page you are not supposed to. You have been logged out for security."
     session[:user_id] = nil
-    redirect_to :controller => "User", :action => "login"
+    redirect_to :controller => "user", :action => "login"
     return false
   end
 
@@ -55,7 +55,7 @@ class ApplicationController < ActionController::Base
     end
     flash[:warning] = "You have attempted to access a page you are not supposed to. You have been logged out for security."
     session[:user_id] = nil
-    redirect_to :controller => "User", :action => "login"
+    redirect_to :controller => "user", :action => "login"
     return false
   end
 
