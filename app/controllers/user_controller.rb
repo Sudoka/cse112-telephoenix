@@ -99,13 +99,13 @@ class UserController < ApplicationController
      
   end
 
-  def  edit       
-       @user = User.find_by_id params[:id] 
-       if (params[:format] == "promote")
+  def  upgrade       
+       @user = User.find_by_id params[:format]
+       if (params[:kind] == "promote")
         @user.user_type = "Moderator"
         @user.save
         flash[:message] = "#{@user.username} has been promoted to a Moderator"
-      elsif ((params[:format] == "demote"))
+      elsif (params[:kind] == "demote")
         @user.user_type = "User"
         @user.save
         flash[:message] = "#{@user.username} has been demoted to a User"

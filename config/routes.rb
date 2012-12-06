@@ -27,8 +27,12 @@ Telephoenix::Application.routes.draw do
 
   get "user/edit"
 
+
   get "user/forget_password"   
   post "user/forget_password"
+
+  get "user/upgrade"
+  post "user/upgrade"
 
   get "user/indexMod"
   get "user/indexAdmin"

@@ -21,7 +21,7 @@
                 %dl
                   %dt
                     %dd
-                      = link_to "Promote", edit_user_path(usr, :promote), confirm: 'Are you sure?'
+                      = link_to "Promote", user_upgrade_path(usr, :kind => "promote"), confirm: 'Are you sure?'
                       = " | "
                       = link_to "Delete User", user_path(usr), method: :delete, confirm: 'Are you sure?'
                     %p 
