@@ -1,0 +1,39 @@
+= stylesheet_link_tag "homepage.css"
+
+%h2 Top Phones
+%div.topPhones
+  Top Phones here
+
+%div.column
+  %h2 Recent Reviews
+  - @recentReviews.each do |review|
+    %div.recentReview
+      %div.img= link_to (review.user.image)? (image_tag review.user.image) : "", user_path(review.user)
+      %div.review
+        %div.phone= link_to "#{review.phone.name}", phone_path(review.phone)
+        %div.review
+          %strong= review.user.username + " said: "
+          = review.review_text
+      %div.star= review.rating
+      %br{:style=>"clear:both;"}
+%div.column
+  %h2 Featured Phone
+  %div.featuredPhone
+    - if @featuredPhone
+      = image_tag @featuredPhone.imgurl
+      = link_to @featuredPhone.brand + " " + @featuredPhone.name, phone_path(@featuredPhone)
+      %strong Specs
+      - @featuredPhone.tags.each do |tag|
+        tag.value
+      %h3 Activity
+      - @featuredPhone.reviews.limit(5).each do |review|
+        %div.recentReview
+          %div.img= link_to (review.user.image)? (image_tag review.user.image) : "", user_path(review.user)
+          %div.review
+            %div.review
+              %strong= review.user.username + " said: "
+              = review.review_text
+          %div.star= review.rating
+          %br{:style=>"clear:both;"}
+
+%br{:style=>"clear:both;"}

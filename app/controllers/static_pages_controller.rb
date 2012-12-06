@@ -7,5 +7,6 @@ class StaticPagesController < ApplicationController
 
   def home
     @recentReviews = Review.limit(5)
+    @featuredPhone = Phone.first(:offset => rand(Phone.count))
   end
 end
