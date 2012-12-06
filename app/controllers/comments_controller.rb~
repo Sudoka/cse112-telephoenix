@@ -54,10 +54,10 @@ class CommentsController < ApplicationController
 
 
   def destroy
-    @comment = Comment.find(params[:id])
+    @comment = Comment.find(:all, :from => "Comments", :conditions => ['id = ? AND review_id = ?', params[:id], params[:review_id]])
     @can_edit = can_edit(@comment.user)
     if @can_edit
-      @comment.destroy
+      @comment[0].destroy
       flash[:message] = "Comment deleted."
       redirect_to phone_review_path(@comment.review.phone, @comment.review)
     else

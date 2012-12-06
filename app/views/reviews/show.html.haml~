@@ -27,6 +27,7 @@
         %tr  
           %td= "\t"
           %td= comment.comment_text
+          %td= button_to "Report"
 
         - if (current_user != nil && (current_user == comment.user || moder? || admin?))
           %td= "\t"
