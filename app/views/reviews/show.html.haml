@@ -42,7 +42,7 @@
       %div
         %div{:style => "float:left" }
           %th
-            = button_to "New Comment", new_phone_review_comment_path(@review.phone, @review)
+            = button_to "New Comment", new_phone_review_comment_path(@review.phone, @review), :method => :get
       %div{:style => "clear:both" }
 
     %tbody
