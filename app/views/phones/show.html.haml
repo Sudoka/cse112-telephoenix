@@ -1,6 +1,9 @@
 %h2= @phone.brand + ' ' + @phone.name
 = (@phone.imgurl) ? (image_tag @phone.imgurl) : ""
-%p= link_to "Back", phones_path
+%div
+  %div{:style => "float:left"}
+    = button_to "Back", {:controller => "phones", :action => "index" }, :method => :get
+%div{:style => "clear:both"}
 
 %ul#tags
   - @tags.each do |tag|
@@ -14,34 +17,52 @@
 %h3~ ("Overall Rating: " + @overallrate.to_s )
 
 %table#reviews
-  %col{:width => "200px"}
   %thead
     %tr
-      %th TelePhoenix User Reviews
-      %th= link_to "New Review", new_phone_review_path(@phone)
+      %th{:width => "250px"}
+        TelePhoenix User Reviews
+      %div
+        %div{:style => "float:left"}
+          %th= button_to "New Review", new_phone_review_path(@phone), :method => :get 
+      %div{:style => "clear:both" }
     %tbody
-      - @reviews.each do |review|
-        %tr
-          %td= "Rating: " + review.rating.to_s
-          
+    - @reviews.each do |review|
+      %tr
+        %td
+          %dl
+            %dt
+              %dd
+                = "User: "
+                = link_to review.user.username.to_s, user_path(review.user)
+              %dd
+                = "Rating: " + review.rating.to_s
+              %dl
+                %dt
+                  %dd
+                    = review.review_text.to_s
           %td
-            = "User: "
-            = link_to review.user.username.to_s, user_path(review.user)
-        %tr
-          - current_user = User.find_by_id(session[:user_id])
-          - if (current_user != nil && (moder? || admin?))
-            %td= button_to "Delete Review", phone_review_path(review), method: :delete, confirm: 'Are you sure?'
-          - else
-            %td= "\t"
-            
-          %td= review.review_text.to_s
-          /%td= #{}"Likes: " + "#{review.num_likes}" 
-          %td= button_to "#{review.num_likes} Likes", {:review_id =>review.id,  :value => "like",:method => "get", :action => "create", :controller => "review_likes" }
+      %tr      
+        %td
+        - current_user = User.find_by_id(session[:user_id])
+        %td
+          %dl  
+            %dt
+              %div
+                %div{:style => "float:left"}
+                  %dd
+                  = button_to "#{review.num_likes} Likes", {:review_id =>review.id,  :value => "like",:method => "get", :action => "create", :controller => "review_likes" }
+              %div{:style => "clear:both" }
 
-          %td= button_to "#{review.num_dislikes} Dislikes", {:review_id =>review.id,  :value => "unlike",:method => "get", :action => "create", :controller => "review_likes" }
-                    
-          %td= link_to "View Comments (" + review.comments.count.to_s + ")", phone_review_path(review.phone, review)
+              %div
+                %div{:style => "float:left"}
+                  %dd= button_to "#{review.num_dislikes} Dislikes", {:review_id =>review.id,  :value => "unlike",:method => "get", :action => "create", :controller => "review_likes" }
+              %div{:style => "clear:both" }
 
-
+              %div
+                %div{:style => "float:left"}         
+                  %dd= link_to "View Comments (" + review.comments.count.to_s + ")", phone_review_path(review.phone, review)
+              %div{:style => "clear:both" }
+          
+ 
 
       
