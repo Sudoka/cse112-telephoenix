@@ -29,6 +29,7 @@ def crawl
       userRev = i.xpath('div/div/span/a/@data-tiptitle')
       numUserRev = i.xpath('div/div/span/a/@data-tiptext')
       image = i.xpath('a[@class="image"]/img/@src')
+      tags = i.xpath('div/ul/li')
 
       open('app/assets/images/phones'+image.to_s[image.to_s.rindex('/'),image.to_s.length], 'wb') do |file|
         file << open(image.to_s).read
@@ -49,7 +50,9 @@ def crawl
       end
       
       
-      phone = Phone.find_or_create_by_name_and_brand_and_imgurl(name, brand, '/assets/phones'+image.to_s[image.to_s.rindex('/'),image.to_s.length])
+      phone = Phone.find_or_create_by_name_and_brand(name, brand)
+      phone.imgurl = '/assets/phones'+image.to_s[image.to_s.rindex('/'),image.to_s.length]
+      phone.save
       if (rate != nil)  
         rating = Rating.find_or_create_by_source_id_and_phone_id(source.id, phone.id)
         rating.rating = Integer(rate*20)
@@ -60,6 +63,11 @@ def crawl
         userRating.rating = userRate*20
         userRating.number_reviews = userRateNum
         userRating.save
+      end
+      if (tags)
+        tags.each do |tag|
+          Tag.find_or_create_by_phone_id_and_key_and_value(phone.id, tag.xpath('span/text()').to_s, tag.xpath('/text()[1]').to_s)
+        end
       end
     end
     page = page+1

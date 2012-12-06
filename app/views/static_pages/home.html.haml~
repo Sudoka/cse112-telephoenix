@@ -3,16 +3,18 @@
 %h2 Top Phones
 %div.topPhones
 %table#phones
-  -@top_phones.each_with_index do |phone, i|
-    %td= (phone.imgurl)? (image_tag phone.imgurl) : ""
-  -@top_phones.each_with_index do |phone, i|
-    %td= "#{i+1} "
-    %td= phone.brand
-    %td= space(1).html_safe
-    %td= link_to "#{phone.name}", phone_path(phone)
-    %td= space(1).html_safe
-    %td= phone.overallRatings().to_s
-    %td= space(5).html_safe
+  %tr
+    -@top_phones.each_with_index do |phone, i|
+      %td
+        %div
+          %strong= "#{i+1} "
+        = link_to (phone.imgurl)? (image_tag phone.imgurl) : "", phone_path(phone)
+  %tr
+    -@top_phones.each_with_index do |phone, i|
+      %td
+        %div= phone.brand
+        %div= link_to phone.name, phone_path(phone)
+        %div.star= phone.overallRatings().to_s
           
 
 %div.column
@@ -21,7 +23,7 @@
     %div.recentReview
       %div.img= link_to (review.user.image)? (image_tag review.user.image) : "", user_path(review.user)
       %div.review
-        %div.phone= link_to "#{review.phone.name}", phone_path(review.phone)
+        %div.phone= link_to review.phone.brand + " " + review.phone.name, phone_path(review.phone)
         %div.review
           %strong= review.user.username + " said: "
           = review.review_text
@@ -31,11 +33,14 @@
   %h2 Featured Phone
   %div.featuredPhone
     - if @featuredPhone
-      = image_tag @featuredPhone.imgurl
       = link_to @featuredPhone.brand + " " + @featuredPhone.name, phone_path(@featuredPhone)
+      = image_tag @featuredPhone.imgurl
+      %br
       %strong Specs
+      %br
       - @featuredPhone.tags.each do |tag|
-        tag.value
+        %ul
+          %li= tag.key + ": " + tag.value
       %h3 Activity
       - @featuredPhone.reviews.limit(5).each do |review|
         %div.recentReview
