@@ -1,5 +1,5 @@
 = stylesheet_link_tag 'user'
-%h4=@user.username
+%h1=@user.username
 %div.profile
   = image_tag @user.image_url(:thumb), :class => 'photo'
   = form_for @user, :html => {:multipart => true} do |f|

@@ -1,34 +1,39 @@
 %h2 What would you like to do?
 
-%table{:style => "border: 50px; width: 65%; height: 30%"}
+%table{:style => "width: 50%; height: 40%"}
   %tr
     %th 
       %b Supervise Moderators
     %th
       %b Assign Moderators
   %tbody
-    %tr
+    %tr{:valign => "top"}
       %td
         %dl
-          %dt
+          %dt{:valign => "center"}
           - if @moderators.empty?
             %dd
             = "No moderators to administrate"
           - @moderators.each do |moderator|
-            %dd{:height => '50px'}
+            %dd
               = moderator.username 
               %dl
                 %dt
                   %dd
-                    = link_to "Demote", user_upgrade_path(moderator, :kind => "demote"), confirm: 'Are you sure?'
-                    = " | "
-                    = link_to "Delete User", user_path(moderator), method: :delete, confirm: 'Are you sure?'
+                    %div
+                      %div{:style => "float:left"}
+                        = button_to "Demote", user_upgrade_path(moderator, :kind => "demote"), confirm: 'Are you sure?'
+                      %div{:style => "float:left"}
+                        = "  |  "
+                      %div{:style => "float:left"}  
+                        = button_to "Delete User", user_path(moderator), method: :delete, confirm: 'Are you sure?'
+                      %div{:style => "clear:both" }
                   %p
       %td
         %dl
           %dt
           - if @users.empty?
-            %dd{:align => "right"}
+            %dd{:align => "center"}
             = "No users to administrate"
           - @users.each do |usr|
             %dd
@@ -36,12 +41,18 @@
               %dl
                 %dt
                   %dd
-                    = link_to "Promote", user_upgrade_path(usr, :kind => "promote"), confirm: 'Are you sure?'
-                    = " | "
-                    = link_to "Delete User", user_path(usr), method: :delete, confirm: 'Are you sure?'
+                    %div
+                      %div{:style => "float:left"}
+                        = button_to "Promote", user_upgrade_path(usr, :kind => "promote"), confirm: 'Are you sure?'
+                      %div{:style => "float:left"}
+                        = "  |  "
+                      %div{:style => "float:left"}  
+                        = button_to "Delete User", user_path(usr), method: :delete, confirm: 'Are you sure?'
+                      %div{:style => "clear:both" }
+
                   %p
     %tr
-      %td= link_to "Back to Phones", phones_path 
+      %td= button_to "Back to Phones", phones_path 
 
 
 

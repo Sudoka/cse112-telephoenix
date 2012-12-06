@@ -1,6 +1,6 @@
 %h2 Administrating Moderators
 
-%table{:style => "width: 800px"}
+%table{:style => "width:50%"}
   %tr
     %th{:align => "left"} 
       %b List of all Users:
@@ -21,9 +21,14 @@
                 %dl
                   %dt
                     %dd
-                      = link_to "Promote", user_upgrade_path(usr, :kind => "promote"), confirm: 'Are you sure?'
-                      = " | "
-                      = link_to "Delete User", user_path(usr), method: :delete, confirm: 'Are you sure?'
+                      %div                
+                        %div{:style => "float:left"}
+                          = button_to "Promote", user_upgrade_path(usr, :kind => "promote"), confirm: 'Are you sure?'
+                        %div{:style => "float:left"}
+                          = " | "
+                        %div{:style => "float:left"}
+                          = button_to "Delete User", user_path(usr), method: :delete, confirm: 'Are you sure?'
+                      %div{:style => "clear:both" }       
                     %p 
       %td{:valign => "top"}
         %dl
