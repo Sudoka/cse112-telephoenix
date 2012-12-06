@@ -18,10 +18,7 @@
             %td= (phone.imgurl)? (image_tag phone.imgurl) : ""
             %td= phone.brand
             %td
-              %div
-                %div{:style => "float:left"}
-                  = button_to "#{phone.name}", phone_path(phone), :method => :get
-              %div{:style => "clear:both"}
+              = link_to "#{phone.name}", phone_path(phone), :method => :get
             %td 
               %span.review
                 =link_to image_stars(phone.num_stars()) ,  phone_path(phone), :class=>"aa" 
