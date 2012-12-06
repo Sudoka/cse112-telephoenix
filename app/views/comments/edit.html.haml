@@ -1,0 +1,8 @@
+%h2 Edit Comment
+
+= form_tag phone_review_comment_path(@comment), method: :put do
+  = label :comment, :comment_text, 'Comment'
+  = text_area :comment, :comment_text, :cols => 80, :rows => 20
+
+  = submit_tag 'Save Changes'
+  

@@ -1,0 +1,24 @@
+div.person {
+display:block;
+width:650px;
+height:120px;
+background-color:#eee;
+border:1px solid gray;
+margin-bottom:15px;
+}
+
+div.person img {
+float:left;
+height:120px;
+}
+
+div.person span {
+display:block;
+float:left;
+      margin-left:20px;
+clear:right;
+}
+
+div.person {
+clear:both;
+}

@@ -30,14 +30,16 @@ $(document).ready ->
        clearTimeout(showTimer)
    
     win = $(this).parent().parent().siblings('div')
-    td = $(this)
-    td = $(this).parent()
+    td = $(this).parent().parent()
+   # td = $(this).parent()
+   
     pos = td.offset()
     width = td.width()    
     win.css({
-      left: (pos.left+width)+'px';
-      left: pos.left;
-      top:(pos.top)+'px';
+      #left: (pos.left+width)+'px';
+      
+      left : (pos.left) + 'px';
+      top: (pos.top-80)+'px';
     })
     showTimer = setTimeout ->     
       win.animate({opacity:1, height:'show'}, "normal")

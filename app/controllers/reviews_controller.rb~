@@ -58,7 +58,7 @@ class ReviewsController < ApplicationController
 
 
   def destroy
-    review = Review.find(params[:id])
+    review = Review.find(params[:phone_id])
     @can_edit = can_edit(review.user)
     if @can_edit
       phone = review.phone

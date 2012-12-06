@@ -20,7 +20,7 @@
             %td= link_to "#{phone.name}", phone_path(phone)
             %td 
               %span.review
-                =link_to image_stars(phone.num_stars()) ,  phone_path(phone)  
+                =link_to image_stars(phone.num_stars()) ,  phone_path(phone), :class=>"aa" 
                 = phone.overallRatings().to_s+"%"
                 = "(#{phone.reviews.count}  reviews)"
               %div.float

@@ -1,31 +1,16 @@
 %h2 Review
 %p= link_to "Back", phone_path(@review.phone)
 
-%table{:style => "border: 50px; width: 100px; height: 20%"}
-  %tr
-    %th{:align => "left"} 
-      %b= @review.user.username.to_s + ": "
-  %tr
-    %th
-  %tbody
-    %tr
-      %td
-      %td
-        %dl
-          %dt
-          %dd
-          = "Rating: "
-          = @review.rating.to_s
-          %dd
-          = @review.review_text 
-          %dl
-            %dt
-            %dd
-            - current_user = User.find_by_id(session[:user_id])
-            - if (current_user != nil && @can_edit) 
-              = link_to "Edit Review", edit_phone_review_path(@review.phone, @review)
-              = "|"
-              = link_to "Delete Review", phone_review_path(@review.phone, @review), :method => :delete, confirm: 'Are you sure?'
+%ul#review
+  %li= @review.user.username.to_s + ": "
+  %li= @review.rating.to_s
+  %li= @review.review_text
+  - current_user = User.find_by_id(session[:user_id])
+  - if @can_edit 
+    = button_to "Edit", edit_phone_review_path(@review.phone, @review), :method => :get
+    = button_to "Delete", phone_review_path(@review.phone, @review), :method => :delete, confirm: 'Are you sure?'
+
+
 
 %table#comments
   %col{:width => "200px"}/
@@ -42,6 +27,7 @@
         %tr  
           %td= "\t"
           %td= comment.comment_text
+          %td= button_to "Report"
 
         - if (current_user != nil && (current_user == comment.user || moder? || admin?))
           %td= "\t"
